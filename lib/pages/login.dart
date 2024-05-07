@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mysql1/mysql1.dart';
-import 'package:unipapers_project/connection_db.dart';
-import 'package:unipapers_project/signup.dart';
+import 'package:unipapers_project/pages/signup.dart';
 
 void main() {
   runApp(MaterialApp(home: MainApp()));
@@ -97,27 +95,7 @@ class MainWidget extends StatelessWidget {
                     width: 100,
                     height: 50,
                     child: ElevatedButton(
-                      onPressed: () async {
-                        var conn = await MySqlConnection.connect(connectToDB());
-                        String password = '';
-                        if (_formKey.currentState!.validate()) {
-                          var results = await conn.query(
-                              'SELECT email, password FROM tab_reader WHERE email = ?',
-                              [myControllerEmail.text]);
-                          for (var row in results) {
-                            password = row[1];
-                          }
-                          if (password != myControllerPass.text) {
-                            SnackBar(
-                              content: Text('Invalid Password'),
-                            );
-                          } else {
-                            SnackBar(
-                              content: Text('Passa prox pag'),
-                            );
-                          }
-                        }
-                      },
+                      onPressed: () {},
                       child: const Text(
                         'Login',
                         style: TextStyle(

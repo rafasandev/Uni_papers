@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:mysql1/mysql1.dart';
-import 'package:unipapers_project/connection_db.dart';
-import 'package:intl/intl.dart';
 
 Future main() async {
   runApp(const MaterialApp(
@@ -34,15 +30,6 @@ class _SignUpPageState extends State<SignUpPage> {
     myControllerPassConfirmation.dispose();
     super.dispose();
   }
-
-  DateFormat formatDate(String date) {
-    return DateFormat.yMd('pt_BR').parse(date) as DateFormat;
-  }
-
-  var maskDateFormatter = MaskTextInputFormatter(
-      mask: '##/##/####',
-      filter: {"#": RegExp(r'[0-9]')},
-      type: MaskAutoCompletionType.lazy);
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +85,6 @@ class _SignUpPageState extends State<SignUpPage> {
                       }
                       return null;
                     },
-                    inputFormatters: [maskDateFormatter],
                     controller: myControllerDate,
                     keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
@@ -152,25 +138,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     height: 50,
                     width: 100,
                     child: ElevatedButton(
-                      onPressed: () async {
-                        DateTime date =
-                            formatDate(myControllerDate.text) as DateTime;
-                        var conn = await MySqlConnection.connect(connectToDB());
-                        if (_formKey.currentState!.validate()) {
-                          var result = await conn.query(
-                              'INSERT INTO tab_reader (email, name, birthDate, password) VALUES (?, ?, ?, ?)',
-                              [
-                                myControllerEmail.text,
-                                myControllerName.text,
-                                date,
-                                myControllerPass.text
-                              ]);
-                          SnackBar(
-                            content: Text('Welcome'),
-                          );
-                        }
-                        conn.close();
-                      },
+                      onPressed: () {},
                       child: const Text(
                         'Sign Up',
                         style: TextStyle(
