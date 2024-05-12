@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
+import 'package:unipapers_project/utils/http_requests/connections.dart';
+import '../models/entities/reader.dart';
+import '../models/entities/writer.dart';
 import '/utils/colors.dart';
 
 class LoginPage extends StatefulWidget {
@@ -12,6 +13,9 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool isWriter = false;
+  String email = "";
+  String password = "";
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +23,13 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: background,
       body: Center(
         child: Form(
+          key: _formKey,
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 50, horizontal: 80),
+            padding: EdgeInsets.symmetric(vertical: 50, horizontal: 55),
             child: Column(
               children: <Widget>[
                 Expanded(
-                  child: Image.asset('/assets/images/logo.png'),
+                  child: Image.asset('lib/images/logo.png'),
                 ),
                 SizedBox(
                   height: 40,
@@ -48,6 +53,15 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
+                  validator: (value) {
+                    if (value == null) {
+                      return "Este campo deve ser preenchido";
+                    } else if (!value.contains("@")) {
+                      return "Formato de email inválido";
+                    }
+                    return null;
+                  },
+                  onChanged: (value) => email = value.toLowerCase(),
                 ),
                 SizedBox(
                   height: 25,
@@ -62,37 +76,54 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   obscureText: true,
+                  validator: (value) {
+                    if (value == null) {
+                      return "Este campo deve ser preenchido";
+                    } else if (!value.contains(RegExp(r'[0-9]'))) {
+                      return "Sua senha deve conter letras e números";
+                    }
+                    return null;
+                  },
+                  onChanged: (value) => password = value,
                 ),
                 SizedBox(
                   height: 25,
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(vertical: 15),
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.end,
-                //     children: [
-                //       Text(
-                //         'É um escritor?',
-                //         style: TextStyle(fontSize: 15),
-                //       ),
-                //       Checkbox(
-                //         value: isWriter,
-                //         activeColor: yellow,
-                //         checkColor: Colors.black,
-                //         onChanged: (value) {
-                //           setState(() {
-                //             isWriter = value!;
-                //           });
-                //         },
-                //       ),
-                //     ],
-                //   ),
-                // ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        'É um escritor?',
+                        style: TextStyle(fontSize: 15),
+                      ),
+                      Checkbox(
+                        value: isWriter,
+                        activeColor: yellow,
+                        checkColor: Colors.black,
+                        onChanged: (value) {
+                          setState(() {
+                            isWriter = value!;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ),
                 Row(
                   children: [
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            if (isWriter) {
+                              _loginWriter(email, password, context);
+                            } else {
+                              _loginReader(email, password, context);
+                            }
+                          }
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: blue,
                           side: BorderSide(
@@ -106,7 +137,6 @@ class _LoginPageState extends State<LoginPage> {
                             'Entrar',
                             style: TextStyle(
                               fontSize: 25,
-                              fontWeight: FontWeight.bold,
                               color: Colors.white,
                             ),
                           ),
@@ -156,4 +186,61 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+}
+
+void _loginReader(String email, String password, BuildContext context) {
+  late Reader user;
+
+  fetchReaderWithEmail(email).then((reader) {
+    user = reader;
+    if (reader != null && reader.password == password) {
+      Navigator.pushNamed(
+        context,
+        '/cadastro_page',
+        arguments: user,
+      );
+    } else {
+      alertError('Email ou senha inválidos', context);
+    }
+  }).catchError((error) {
+    alertError(error, context);
+  });
+}
+
+void _loginWriter(String email, String senha, BuildContext context) {
+  late Writer user;
+
+  fetchWriterWithEmail(email).then((writer) {
+    user = writer;
+    if (writer != null && writer.password == senha) {
+      Navigator.pushNamed(
+        context,
+        '/cadastro_page',
+        arguments: user,
+      );
+    } else {
+      alertError('Email ou senha inválidos', context);
+    }
+  }).catchError((error) {
+    alertError(error, context);
+  });
+}
+
+Future<void> alertError(String algo, BuildContext context) async {
+  return showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text(algo),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text('ok'),
+          ),
+        ],
+      );
+    },
+  );
 }
