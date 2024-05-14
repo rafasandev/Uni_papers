@@ -30,7 +30,7 @@ class _CadastroPageState extends State<CadastroPage> {
           child: Form(
             key: _formKey,
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 50, horizontal: 50),
+              padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 50),
               child: Column(
                 children: [
                   Row(
@@ -40,16 +40,16 @@ class _CadastroPageState extends State<CadastroPage> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-                  Text(
+                  const Text(
                     "CRIAR CONTA",
                     style: TextStyle(
                       fontSize: 23,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   TextFormField(
@@ -69,7 +69,7 @@ class _CadastroPageState extends State<CadastroPage> {
                       return null;
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   TextFormField(
@@ -94,7 +94,7 @@ class _CadastroPageState extends State<CadastroPage> {
                       return null;
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   TextFormField(
@@ -117,7 +117,7 @@ class _CadastroPageState extends State<CadastroPage> {
                       return null;
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   TextFormField(
@@ -144,7 +144,7 @@ class _CadastroPageState extends State<CadastroPage> {
                       return null;
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   TextFormField(
@@ -163,19 +163,19 @@ class _CadastroPageState extends State<CadastroPage> {
                       }
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        padding: EdgeInsets.fromLTRB(15, 6, 15, 6),
+                        padding: const EdgeInsets.fromLTRB(15, 6, 15, 6),
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.black),
                             borderRadius: BorderRadius.circular(15),
                             color: white),
-                        child: Text(
+                        child: const Text(
                           "Você é:",
                           style: TextStyle(
                             fontSize: 18,
@@ -193,7 +193,7 @@ class _CadastroPageState extends State<CadastroPage> {
                               });
                             },
                           ),
-                          Text(
+                          const Text(
                             "Leitor",
                             style: TextStyle(
                               fontSize: 18,
@@ -212,7 +212,7 @@ class _CadastroPageState extends State<CadastroPage> {
                               });
                             },
                           ),
-                          Text(
+                          const Text(
                             "Escritor",
                             style: TextStyle(
                               fontSize: 18,
@@ -222,7 +222,7 @@ class _CadastroPageState extends State<CadastroPage> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Builder(builder: (context) {
@@ -251,7 +251,7 @@ class _CadastroPageState extends State<CadastroPage> {
                               return null;
                             },
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
                           Container(
@@ -259,11 +259,11 @@ class _CadastroPageState extends State<CadastroPage> {
                               color: white,
                               borderRadius: BorderRadius.circular(5),
                             ),
-                            padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                             child: DropdownButton(
                               isExpanded: true,
                               value: dropdownValue,
-                              hint: Text("CURSO"),
+                              hint: const Text("CURSO"),
                               dropdownColor: white,
                               items: courses_list.map<DropdownMenuItem<String>>(
                                   (String value) {
@@ -282,9 +282,9 @@ class _CadastroPageState extends State<CadastroPage> {
                         ],
                       );
                     }
-                    return SizedBox();
+                    return const SizedBox();
                   }),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   SizedBox(
@@ -293,7 +293,7 @@ class _CadastroPageState extends State<CadastroPage> {
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: yellow,
-                        side: BorderSide(color: Colors.black, width: 2),
+                        side: const BorderSide(color: Colors.black, width: 2),
                       ),
                       onPressed: () async {
                         _formKey.currentState!.validate();
@@ -305,7 +305,7 @@ class _CadastroPageState extends State<CadastroPage> {
                         }
                         Navigator.pop(context);
                       },
-                      child: Text(
+                      child: const Text(
                         "Criar Conta",
                         style: TextStyle(
                           fontSize: 20,
@@ -314,7 +314,7 @@ class _CadastroPageState extends State<CadastroPage> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   ElevatedButton(
