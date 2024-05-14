@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unipapers_project/pages/cadastro_page.dart';
+import 'package:unipapers_project/pages/home_page.dart';
 import 'package:unipapers_project/pages/login_page.dart';
 
 void main() {
@@ -20,6 +21,9 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => LoginPage(),
         '/cadastro_page': (context) => CadastroPage(),
+        '/home_page': (context) => HomePage(),
+        '/search_page': (context) => CadastroPage(),
+        '/profile_page': (context) => CadastroPage(),
       },
     );
   }
