@@ -14,37 +14,37 @@ class BottomBarComponent extends StatefulWidget {
 }
 
 class _BottomBarComponentState extends State<BottomBarComponent> {
+  int _currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Text("data"),
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: (value) {
-          if (value == 0) {
-            Navigator.pushNamed(context, '/home_page');
-          }
-          if (value == 1) {
-            Navigator.pushNamed(context, '/search_page');
-          }
-          if (value == 2) {
-            Navigator.pushNamed(context, '/profile_page');
-          }
-        },
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: "Search",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: "Profile",
-          ),
-        ],
-      ),
+    return BottomNavigationBar(
+      onTap: (value) {
+        if (value == 0) {
+          Navigator.pushNamed(context, '/home_page');
+        }
+        if (value == 1) {
+          Navigator.pushNamed(context, '/search_page');
+        }
+        if (value == 2) {
+          Navigator.pushNamed(context, '/profile_page');
+        }
+      },
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: "Home",
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.search),
+          label: "Search",
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.account_circle),
+          label: "Profile",
+        ),
+      ],
+      currentIndex: _currentIndex,
     );
   }
 }
