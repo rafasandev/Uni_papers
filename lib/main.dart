@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:unipapers_project/pages/cadastro_page.dart';
 import 'package:unipapers_project/pages/home_page.dart';
 import 'package:unipapers_project/pages/login_page.dart';
+import 'package:unipapers_project/utils/colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: blue),
         useMaterial3: true,
       ),
       routes: {
