@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:unipapers_project/utils/http_requests/connections.dart';
 import '../models/entities/reader.dart';
 import '../models/entities/writer.dart';
+import '../widgets/util_functions.dart';
 import '/utils/colors.dart';
 
 class LoginPage extends StatefulWidget {
@@ -25,46 +26,47 @@ class _LoginPageState extends State<LoginPage> {
         child: Form(
           key: _formKey,
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 50, horizontal: 55),
+            padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 55),
             child: Column(
               children: <Widget>[
                 Expanded(
                   child: Image.asset('lib/images/logo.png'),
                 ),
-                SizedBox(
-                  height: 40,
+                const SizedBox(
+                  height: 30,
                 ),
-                Text(
+                const Text(
                   'ENTRAR NA SUA CONTA',
                   style: TextStyle(
                     fontSize: 23,
                   ),
                 ),
-                SizedBox(
-                  height: 35,
+                const SizedBox(
+                  height: 25,
                 ),
                 TextFormField(
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: white,
                     labelText: 'Email',
-                    hintText: 'Escreva seu melhor email aqui!',
+                    hintText: 'exemplo@email.com',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                   validator: (value) {
-                    if (value == null) {
+                    if (value == '') {
                       return "Este campo deve ser preenchido";
-                    } else if (!value.contains("@")) {
+                    }
+                    if (!value!.contains("@")) {
                       return "Formato de email inválido";
                     }
                     return null;
                   },
                   onChanged: (value) => email = value.toLowerCase(),
                 ),
-                SizedBox(
-                  height: 25,
+                const SizedBox(
+                  height: 15,
                 ),
                 TextFormField(
                   decoration: InputDecoration(
@@ -77,24 +79,28 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   obscureText: true,
                   validator: (value) {
-                    if (value == null) {
+                    if (value == '') {
                       return "Este campo deve ser preenchido";
-                    } else if (!value.contains(RegExp(r'[0-9]'))) {
+                    }
+                    if (!value!.contains(RegExp(r'[0-9]'))) {
                       return "Sua senha deve conter letras e números";
+                    }
+                    if (value.length < 6) {
+                      return "Sua senha deve ter pelo menos 8 caracteres";
                     }
                     return null;
                   },
                   onChanged: (value) => password = value,
                 ),
-                SizedBox(
-                  height: 25,
+                const SizedBox(
+                  height: 15,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text(
+                      const Text(
                         'É um escritor?',
                         style: TextStyle(fontSize: 15),
                       ),
@@ -118,21 +124,21 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             if (isWriter) {
-                              _loginWriter(email, password, context);
+                              loginWriter(email, password, context);
                             } else {
-                              _loginReader(email, password, context);
+                              loginReader(email, password, context);
                             }
                           }
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: blue,
-                          side: BorderSide(
+                          side: const BorderSide(
                             width: 2.5,
                             color: Colors.black,
                           ),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(4.0),
+                        child: const Padding(
+                          padding: EdgeInsets.all(4.0),
                           child: Text(
                             'Entrar',
                             style: TextStyle(
@@ -145,13 +151,13 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 25,
+                const SizedBox(
+                  height: 15,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text(
+                    const Text(
                       'Não possui uma conta?',
                       style: TextStyle(
                         fontSize: 15,
@@ -168,7 +174,7 @@ class _LoginPageState extends State<LoginPage> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      child: Text(
+                      child: const Text(
                         'Criar conta',
                         style: TextStyle(
                           fontSize: 15,
@@ -186,61 +192,4 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-}
-
-void _loginReader(String email, String password, BuildContext context) {
-  late Reader user;
-
-  fetchReaderWithEmail(email).then((reader) {
-    user = reader;
-    if (reader != null && reader.password == password) {
-      Navigator.pushNamed(
-        context,
-        '/cadastro_page',
-        arguments: user,
-      );
-    } else {
-      alertError('Email ou senha inválidos', context);
-    }
-  }).catchError((error) {
-    alertError(error, context);
-  });
-}
-
-void _loginWriter(String email, String senha, BuildContext context) {
-  late Writer user;
-
-  fetchWriterWithEmail(email).then((writer) {
-    user = writer;
-    if (writer != null && writer.password == senha) {
-      Navigator.pushNamed(
-        context,
-        '/cadastro_page',
-        arguments: user,
-      );
-    } else {
-      alertError('Email ou senha inválidos', context);
-    }
-  }).catchError((error) {
-    alertError(error, context);
-  });
-}
-
-Future<void> alertError(String algo, BuildContext context) async {
-  return showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text(algo),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: const Text('ok'),
-          ),
-        ],
-      );
-    },
-  );
 }
