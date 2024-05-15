@@ -21,15 +21,18 @@ class _ArticleWidgetState extends State<ArticleWidget> {
           bottom: BorderSide(color: Colors.black),
         ),
       ),
-      padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+      padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
       child: Column(
         children: [
-          Text(
-            widget.article.title,
-            textAlign: TextAlign.left,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
+          Container(
+            width: double.infinity,
+            child: Text(
+              widget.article.title,
+              textAlign: TextAlign.left,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
             ),
           ),
           Padding(
@@ -37,11 +40,14 @@ class _ArticleWidgetState extends State<ArticleWidget> {
             child: Column(
               children: [
                 for (var i = 0; i < widget.article.authorsName.length; i++)
-                  Text(
-                    widget.article.authorsName[i],
-                    textAlign: TextAlign.left,
-                    style: const TextStyle(
-                      fontStyle: FontStyle.italic,
+                  Container(
+                    width: double.infinity,
+                    child: Text(
+                      widget.article.authorsName[i],
+                      textAlign: TextAlign.left,
+                      style: const TextStyle(
+                        fontStyle: FontStyle.italic,
+                      ),
                     ),
                   )
               ],
