@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:unipapers_project/models/components/bottom_appbar.dart';
 import 'package:unipapers_project/models/entities/article.dart';
 
 import '../models/components/article_widget.dart';
@@ -29,7 +28,6 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomBarComponent(),
     );
   }
 }

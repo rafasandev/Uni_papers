@@ -320,7 +320,7 @@ class _CadastroPageState extends State<CadastroPage> {
                   ElevatedButton(
                     onPressed: () {
                       // Navigator.pop(context);
-                      Navigator.pushNamed(context, '/home_page');
+                      Navigator.pushNamed(context, '/main_page');
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: blue,

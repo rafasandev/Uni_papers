@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:unipapers_project/utils/http_requests/connections.dart';
-import '../models/entities/reader.dart';
-import '../models/entities/writer.dart';
 import '../widgets/util_functions.dart';
 import '/utils/colors.dart';
 
