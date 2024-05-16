@@ -320,7 +320,8 @@ class _CadastroPageState extends State<CadastroPage> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      // Navigator.pop(context);
+                      Navigator.pushNamed(context, '/main_page');
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: blue,
@@ -329,7 +330,7 @@ class _CadastroPageState extends State<CadastroPage> {
                       ),
                     ),
                     child: const Text(
-                      'Criar conta',
+                      'Já possuo conta',
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
