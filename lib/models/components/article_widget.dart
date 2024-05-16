@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:unipapers_project/models/entities/article.dart';
+import 'package:unipapers_project/models/entities/research.dart';
 import 'package:unipapers_project/utils/colors.dart';
 
 class ArticleWidget extends StatefulWidget {
-  final Article article;
+  final Research article;
 
   const ArticleWidget({super.key, required this.article});
 
@@ -39,17 +39,16 @@ class _ArticleWidgetState extends State<ArticleWidget> {
             padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
             child: Column(
               children: [
-                for (var i = 0; i < widget.article.authorsName.length; i++)
-                  Container(
-                    width: double.infinity,
-                    child: Text(
-                      widget.article.authorsName[i],
-                      textAlign: TextAlign.left,
-                      style: const TextStyle(
-                        fontStyle: FontStyle.italic,
-                      ),
+                Container(
+                  width: double.infinity,
+                  child: Text(
+                    widget.article.author.name,
+                    textAlign: TextAlign.left,
+                    style: const TextStyle(
+                      fontStyle: FontStyle.italic,
                     ),
-                  )
+                  ),
+                )
               ],
             ),
           ),

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:unipapers_project/models/entities/reader.dart';
+import 'package:unipapers_project/models/entities/research.dart';
 import 'package:unipapers_project/models/entities/writer.dart';
 
 Future<Reader> fetchReaderWithEmail(String email) async {
@@ -25,6 +26,35 @@ Future<Writer> fetchWriterWithEmail(String email) async {
     return Writer.fromJson(json.decode(response.body) as Map<String, dynamic>);
   } else {
     throw Exception('Usuário não encontrado');
+  }
+}
+
+Future<List<Research>> fetchAllResearches() async {
+  final response = await http.get(Uri.parse(
+      'https://unipapers-requests-5d1ab2edc5c0.herokuapp.com/api/researches'));
+
+  if (response.statusCode == 200) {
+    // Servidor retornou as pesquisas
+    Iterable list = json.decode(response.body);
+    List<Research> researches =
+        List<Research>.from(list.map((e) => Research.fromJson(e)));
+    return researches;
+  } else {
+    throw Exception('Falha ao recuperar pesquisas');
+  }
+}
+
+Future<List<Research>> fetchResearchByName(String name) async {
+  final response = await http.get(Uri.parse(
+      'https://unipapers-requests-5d1ab2edc5c0.herokuapp.com/api/researches/name?name=$name'));
+
+  if (response.statusCode == 200) {
+    Iterable list = json.decode(response.body);
+    List<Research> researches =
+        List<Research>.from(list.map((e) => Research.fromJson(e)));
+    return researches;
+  } else {
+    throw Exception('Falha ao pesquisar artigos');
   }
 }
 

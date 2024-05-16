@@ -10,7 +10,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  int _currentIndex = 1;
+  int _currentIndex = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(),
