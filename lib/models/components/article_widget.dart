@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:unipapers_project/models/entities/article.dart';
 import 'package:unipapers_project/utils/colors.dart';
+import 'package:unipapers_project/widgets/util_functions.dart';
 
 class ArticleWidget extends StatefulWidget {
   final Article article;
@@ -70,7 +71,9 @@ class _ArticleWidgetState extends State<ArticleWidget> {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  getFile();
+                },
                 child: const Text(
                   "Download",
                   style: TextStyle(

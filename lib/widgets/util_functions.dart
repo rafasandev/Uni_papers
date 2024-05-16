@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 import '../models/entities/reader.dart';
@@ -62,4 +65,15 @@ void loginWriter(String email, String senha, BuildContext context) {
   }).catchError((error) {
     alertError(error, context);
   });
+}
+
+void getFile() async {
+  FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+  if (result != null) {
+    File file = File(result.files.single.path!);
+    print(file);
+  } else {
+    print("Erro");
+  }
 }
