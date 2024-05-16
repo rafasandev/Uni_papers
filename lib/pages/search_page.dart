@@ -1,10 +1,6 @@
-// ignore_for_file: unused_import
-
 import 'package:flutter/material.dart';
-import 'package:unipapers_project/models/entities/article.dart';
-import 'package:unipapers_project/utils/colors.dart';
 
-import '../models/components/article_widget.dart';
+import '../widgets/search_widget.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -14,7 +10,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  List<Article> articles = fecthArticles();
+  String search = '';
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +33,14 @@ class _SearchPageState extends State<SearchPage> {
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                             borderSide: BorderSide(color: Colors.grey))),
+                    onChanged: (value) {
+                      setState(() {
+                        search = value;
+                        SearchWidget(
+                          search: search,
+                        );
+                      });
+                    },
                   ),
                   Container(
                     width: double.infinity,
@@ -48,7 +52,7 @@ class _SearchPageState extends State<SearchPage> {
                           textAlign: TextAlign.left,
                         ),
                         Text(
-                          "Resultado",
+                          search,
                           textAlign: TextAlign.left,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -57,8 +61,8 @@ class _SearchPageState extends State<SearchPage> {
                       ],
                     ),
                   ),
-                  for (var i = 0; i < articles.length; i++)
-                    ArticleWidget(article: articles[i])
+                  //TODO: IMPLEMENTAÇÃO DE PESQUISA
+                  SearchWidget(search: search),
                 ],
               ),
             )
@@ -68,3 +72,10 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 }
+
+
+
+// for (int i = 0; i < articles.length; i++)
+//                     ArticleWidget(
+//                       article: articles[i],
+//                     )

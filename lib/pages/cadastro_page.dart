@@ -161,6 +161,7 @@ class _CadastroPageState extends State<CadastroPage> {
                       if (senha != value) {
                         return "As senhas não conferem";
                       }
+                      return null;
                     },
                   ),
                   const SizedBox(
