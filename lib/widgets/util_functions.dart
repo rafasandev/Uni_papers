@@ -1,7 +1,11 @@
 import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
+import 'package:flutter/foundation.dart';
+import 'package:path_provider/path_provider.dart';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:unipapers_project/models/entities/article.dart';
 
 import '../models/entities/reader.dart';
 import '../models/entities/research.dart';
@@ -69,6 +73,36 @@ void loginWriter(String email, String senha, BuildContext context) {
     });
   } catch (e) {
     alertError('Usuário não encontrado', context);
+  }
+}
+
+void filePicker() async {
+  FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+  if (result != null) {
+    PlatformFile file = result.files.first;
+    Uint8List? bytesList = file.bytes;
+    String fileName = file.name;
+
+    saveBLOBasPDF(bytesList, fileName);
+  } else {
+    // User canceled the picker
+  }
+}
+
+Future<void> saveBLOBasPDF(Uint8List? bytes, String fileName) async {
+  try {
+    if (!kIsWeb) {
+      final directory = await getTemporaryDirectory();
+      final filePath = '${directory.path}/$fileName';
+
+      final file = File(filePath);
+      await file.writeAsBytes(bytes!);
+
+      print("PDF salvo em: $filePath");
+    }
+  } catch (e) {
+    print(e);
   }
 }
 
