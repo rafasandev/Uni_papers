@@ -16,16 +16,16 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: background,
         ),
         alignment: Alignment.topCenter,
-        padding: EdgeInsets.fromLTRB(40, 50, 40, 0),
+        padding: const EdgeInsets.fromLTRB(40, 50, 40, 0),
         child: SingleChildScrollView(
           child: Column(
             children: [
               Container(
-                child: Text(
+                child: const Text(
                   "Perfil",
                   style: TextStyle(
                     fontSize: 32,
@@ -35,22 +35,22 @@ class _ProfilePageState extends State<ProfilePage> {
               Container(
                 decoration: BoxDecoration(
                     color: yellow, borderRadius: BorderRadius.circular(20)),
-                padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                margin: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     RichText(
                       text: TextSpan(
                         text: "Olá ",
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 28,
                           color: Colors.black,
                         ),
                         children: [
                           TextSpan(
                             text: widget.user.name,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 36,
                               fontWeight: FontWeight.bold,
                             ),
@@ -58,10 +58,10 @@ class _ProfilePageState extends State<ProfilePage> {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
-                    Icon(Icons.waving_hand_outlined)
+                    const Icon(Icons.waving_hand_outlined)
                   ],
                 ),
                 // child: Text("Edite seu perfil: ${widget.user!.name}"),
@@ -78,8 +78,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     onPressed: () {
                       Navigator.pushNamed(context, "/edit_profile");
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
                       child: Column(
                         children: [
                           Icon(Icons.edit),
@@ -98,10 +98,11 @@ class _ProfilePageState extends State<ProfilePage> {
                       backgroundColor: background,
                     ),
                     onPressed: () {
-                      Navigator.pushNamed(context, "/create_article");
+                      Navigator.pushNamed(context, "/create_article",
+                          arguments: widget.user.id);
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
                       child: Column(
                         children: [
                           Icon(Icons.library_add_outlined),
@@ -116,67 +117,67 @@ class _ProfilePageState extends State<ProfilePage> {
                 ],
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, 40, 0, 40),
+                margin: const EdgeInsets.fromLTRB(0, 40, 0, 40),
                 decoration: BoxDecoration(
                     border: Border.all(color: Colors.black),
                     borderRadius: BorderRadius.circular(20)),
-                padding: EdgeInsets.fromLTRB(20, 5, 20, 10),
+                padding: const EdgeInsets.fromLTRB(20, 5, 20, 10),
                 child: DefaultTextStyle.merge(
-                  style: TextStyle(fontSize: 16),
+                  style: const TextStyle(fontSize: 16),
                   textAlign: TextAlign.justify,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                        child: Text(
+                        margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                        child: const Text(
                           "Sobre o UniPapers",
                           style: TextStyle(
                               fontSize: 22, fontWeight: FontWeight.bold),
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.fromLTRB(0, 15, 0, 10),
-                        child: Text(
+                        margin: const EdgeInsets.fromLTRB(0, 15, 0, 10),
+                        child: const Text(
                             "O projeto UniPapers foi idealizado por alunos do curso de Engenharia da Computação da Universidade de Sorocaba (UNISO) com o propósito de integrar os sistemas de gerenciamento acadêmico da instituição. Criado por Luiz Gustavo, Pedro Lucas da Silva e Rafael Santos, o projeto visa facilitar o acesso e a distribuição de artigos acadêmicos produzidos pelos estudantes da universidade, promovendo a disseminação de conhecimento e incentivando a pesquisa e a colaboração acadêmica."),
                       ),
                       Container(
-                        margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                        child: Text(
+                        margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                        child: const Text(
                           "Objetivo",
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.fromLTRB(0, 15, 0, 10),
-                        child: Text(
+                        margin: const EdgeInsets.fromLTRB(0, 15, 0, 10),
+                        child: const Text(
                             "O principal objetivo do UniPapers é agregar os sistemas de gerenciamento e acadêmicos da UNISO em uma plataforma acessível e eficiente. A proposta é criar um aplicativo mobile que permita a disseminação e distribuição de artigos acadêmicos de forma facilitada, oferecendo acesso livre a qualquer usuário interessado, dentro e fora da comunidade acadêmica."),
                       ),
                       Container(
-                        margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                        child: Text(
+                        margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                        child: const Text(
                           "Desenvolvimento e Estrutura",
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.fromLTRB(0, 15, 0, 10),
-                        child: Text(
+                        margin: const EdgeInsets.fromLTRB(0, 15, 0, 10),
+                        child: const Text(
                             "O UniPapers foi inicialmente concebido no âmbito do componente curricular de Aplicações Mobile. A ideia central é criar um aplicativo que centralize a produção acadêmica dos alunos da UNISO, permitindo que os próprios estudantes gerenciem os dados e os artigos submetidos. O gerenciamento seria realizado sob a orientação de professores orientadores, garantindo a qualidade e a relevância do conteúdo disponibilizado."),
                       ),
                       Container(
-                        margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                        child: Text(
+                        margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                        child: const Text(
                           "Próximos Passos",
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.fromLTRB(0, 15, 0, 10),
-                        child: Text(
+                        margin: const EdgeInsets.fromLTRB(0, 15, 0, 10),
+                        child: const Text(
                             "Atualmente, o UniPapers está em fase de demonstração, com o objetivo de obter aprovação para o desenvolvimento completo da aplicação e sua eventual integração com os sistemas da universidade. O grupo de desenvolvedores busca apoio institucional e recursos para transformar o protótipo em uma ferramenta plenamente funcional, que possa ser integrada ao ambiente acadêmico da UNISO."),
                       ),
                     ],

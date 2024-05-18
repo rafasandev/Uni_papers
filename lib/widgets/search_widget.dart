@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/components/article_widget.dart';
+import 'article_widget.dart';
 import '../models/entities/research.dart';
 import '../utils/http_requests/connections.dart';
 

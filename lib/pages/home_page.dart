@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:unipapers_project/models/entities/research.dart';
 import 'package:unipapers_project/widgets/util_functions.dart';
 
-import '../models/components/article_widget.dart';
+import '../widgets/article_widget.dart';
 import '../utils/http_requests/connections.dart';
 
 class HomePage extends StatefulWidget {
