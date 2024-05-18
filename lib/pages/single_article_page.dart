@@ -96,8 +96,9 @@ class SingleArticlePage extends StatelessWidget {
                     ),
                     Container(
                       width: double.infinity,
+                      margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
                       child: Text(
-                        article.description,
+                        utf8.decode(article.description.codeUnits),
                         textAlign: TextAlign.justify,
                       ),
                     ),

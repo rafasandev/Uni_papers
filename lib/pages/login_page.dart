@@ -23,7 +23,7 @@ class _LoginPageState extends State<LoginPage> {
         child: Form(
           key: _formKey,
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 55),
+            padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 30),
             child: Column(
               children: <Widget>[
                 Expanded(
@@ -151,36 +151,38 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(
                   height: 15,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    const Text(
-                      'Não possui uma conta?',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.black,
-                      ),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, "/cadastro_page");
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: yellow,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      child: const Text(
-                        'Criar conta',
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      const Text(
+                        'Não possui uma conta?',
                         style: TextStyle(
                           fontSize: 15,
-                          fontWeight: FontWeight.bold,
                           color: Colors.black,
                         ),
                       ),
-                    )
-                  ],
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, "/cadastro_page");
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: yellow,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: const Text(
+                          'Criar conta',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ],
             ),

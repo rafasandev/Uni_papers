@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import '../widgets/search_widget.dart';
 
@@ -20,66 +22,73 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
-          child: Column(
-            children: [
-              Container(
-                padding: EdgeInsets.fromLTRB(80, 20, 80, 20),
-                child: Image.asset("lib/images/onlyHandsLogo.png"),
-              ),
-              TextField(
-                decoration: InputDecoration(
-                    label: Text("Pesquise por um artigo"),
-                    suffixIcon: (search == "")
-                        ? Icon(Icons.search)
-                        : IconButton(
-                            onPressed: () {
-                              setState(() {
-                                search = "";
-                                clearText();
-                                SearchWidget(search: search);
-                              });
-                            },
-                            icon: Icon(Icons.close)),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(color: Colors.grey))),
-                controller: fieldText,
-                onChanged: (value) {
-                  setState(() {
-                    search = value;
-                    SearchWidget(
-                      search: search,
-                    );
-                  });
-                },
-              ),
-              if (search != '')
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.fromLTRB(5, 15, 0, 15),
-                  child: Row(
-                    children: [
-                      Text(
-                        "Resultados para: ",
-                        textAlign: TextAlign.left,
-                      ),
-                      Text(
-                        search,
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
+      body: Center(
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(60, 0, 60, 00),
+                    child: Image.asset("lib/images/onlyHandsLogo.png"),
                   ),
-                ),
-              //TODO: IMPLEMENTAÇÃO DE PESQUISA
-              SearchWidget(search: search)
-            ],
-          ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                          label: const Text("Pesquise por um artigo"),
+                          suffixIcon: (search == "")
+                              ? const Icon(Icons.search)
+                              : IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      search = "";
+                                      clearText();
+                                      SearchWidget(search: search);
+                                    });
+                                  },
+                                  icon: const Icon(Icons.close)),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide:
+                                  const BorderSide(color: Colors.grey))),
+                      controller: fieldText,
+                      onChanged: (value) {
+                        setState(() {
+                          search = value;
+                          SearchWidget(
+                            search: search,
+                          );
+                        });
+                      },
+                    ),
+                  ),
+                  if (search != '')
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.fromLTRB(5, 15, 0, 15),
+                      child: Row(
+                        children: [
+                          const Text(
+                            "Resultados para: ",
+                            textAlign: TextAlign.left,
+                          ),
+                          Text(
+                            search,
+                            textAlign: TextAlign.left,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                ],
+              ),
+            ),
+            SearchWidget(search: search),
+          ],
         ),
       ),
     );

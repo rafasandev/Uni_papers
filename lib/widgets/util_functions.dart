@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
+import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'package:file_picker/file_picker.dart';
@@ -76,30 +77,50 @@ void loginWriter(String email, String senha, BuildContext context) {
   }
 }
 
-void filePicker() async {
-  FilePickerResult? result = await FilePicker.platform.pickFiles();
+Future<String> savePDFArchive() async {
+  FilePickerResult? result = await FilePicker.platform.pickFiles(
+      withData: true, allowedExtensions: ["pdf"], type: FileType.custom);
 
   if (result != null) {
-    PlatformFile file = result.files.first;
-    Uint8List? bytesList = file.bytes;
-    String fileName = file.name;
+    try {
+      PlatformFile file = result.files.first;
+      Uint8List? bytesList = file.bytes;
+      String fileName = file.name;
 
-    saveBLOBasPDF(bytesList, fileName);
+      var decode = bytesList!.map((e) => e.toString()).join(",");
+
+      print(file);
+      saveBLOBAsPDF(decode, fileName);
+
+      return decode;
+    } catch (error) {
+      return error.toString();
+    }
   } else {
     // User canceled the picker
+    return "Erro";
   }
 }
 
-Future<void> saveBLOBasPDF(Uint8List? bytes, String fileName) async {
+List<int> convertStringToBytes(String bytes) {
+  List<int> bytesList = bytes.split(",").map((e) => int.parse(e)).toList();
+
+  return bytesList;
+}
+
+Future<void> saveBLOBAsPDF(String bytes, String fileName) async {
   try {
     if (!kIsWeb) {
       final directory = await getTemporaryDirectory();
       final filePath = '${directory.path}/$fileName';
 
       final file = File(filePath);
-      await file.writeAsBytes(bytes!);
+      await file.writeAsBytes(convertStringToBytes(bytes));
 
-      print("PDF salvo em: $filePath");
+      if (Platform.isAndroid || Platform.isIOS) {
+        print("PDF salvo em: $filePath");
+        OpenFile.open(filePath);
+      }
     }
   } catch (e) {
     print(e);

@@ -91,7 +91,7 @@ class _ArticleWidgetState extends State<ArticleWidget> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  filePicker();
+                  savePDFArchive();
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: yellow,

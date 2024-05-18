@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unipapers_project/pages/home_page.dart';
+import 'package:unipapers_project/pages/profile_page.dart';
 import 'package:unipapers_project/pages/search_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -15,28 +16,29 @@ class _MainPageState extends State<MainPage> {
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     SearchPage(),
-    Text(
-      'Index 2: School',
-    ),
+    ProfilePage()
   ];
 
   @override
   Widget build(BuildContext context) {
+    final user = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
-      body: Center(
-        child: _widgetOptions.elementAt(_currentIndex),
-      ),
+      body: Center(child: Builder(builder: (context) {
+        if (_currentIndex == 0) {
+          return HomePage();
+        }
+        if (_currentIndex == 1) {
+          return SearchPage();
+        }
+        if (_currentIndex == 2) {
+          return ProfilePage(
+            user: user,
+          );
+        }
+        return Text("Erro");
+      })),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (value) {
-          // if (value == 0) {
-          //   Navigator.pushNamed(context, '/home_page');
-          // }
-          // if (value == 1) {
-          //   Navigator.pushNamed(context, '/search_page');
-          // }
-          // if (value == 2) {
-          //   Navigator.pushNamed(context, '/profile_page');
-          // }
           setState(() {
             _currentIndex = value;
           });
@@ -48,11 +50,11 @@ class _MainPageState extends State<MainPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
-            label: "Search",
+            label: "Pesquisa",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
-            label: "Profile",
+            label: "Perfil",
           ),
         ],
         currentIndex: _currentIndex,

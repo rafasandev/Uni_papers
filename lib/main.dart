@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:unipapers_project/pages/article_creation_page.dart';
 import 'package:unipapers_project/pages/cadastro_page.dart';
+import 'package:unipapers_project/pages/edit_profile_page.dart';
 import 'package:unipapers_project/pages/login_page.dart';
 import 'package:unipapers_project/pages/main_page.dart';
 import 'package:unipapers_project/pages/single_article_page.dart';
@@ -26,7 +28,9 @@ class MyApp extends StatelessWidget {
           '/': (context) => LoginPage(),
           '/cadastro_page': (context) => CadastroPage(),
           '/main_page': (context) => MainPage(),
-          '/single_article_page': (BuildContext context) => SingleArticlePage()
+          '/single_article_page': (BuildContext context) => SingleArticlePage(),
+          '/edit_profile': (BuildContext context) => EditProfilePage(),
+          '/create_article': (BuildContext context) => ArticleCreationPage()
         },
       ),
     );
