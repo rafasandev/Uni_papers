@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:unipapers_project/models/entities/article.dart';
-import 'package:unipapers_project/models/entities/research.dart';
 import 'package:unipapers_project/utils/colors.dart';
 import 'package:unipapers_project/widgets/util_functions.dart';
 
 class ArticleCreationPage extends StatefulWidget {
-  ArticleCreationPage({super.key});
+  const ArticleCreationPage({super.key});
 
   @override
   State<ArticleCreationPage> createState() => _ArticleCreationPageState();
@@ -37,7 +35,7 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                 backgroundColor: background,
                 elevation: 0,
                 foregroundColor: Colors.black),
-            child: Row(
+            child: const Row(
               children: [
                 Text("Confirmar"),
                 Icon(Icons.check),
@@ -173,8 +171,7 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                           child: Text(
                             "Descrição*",
                             style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
+                                fontWeight: FontWeight.bold, fontSize: 18),
                           ),
                         ),
                         TextFormField(
@@ -222,9 +219,13 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                   ),
                   if (fileName != "")
                     Container(
+                      padding: const EdgeInsets.fromLTRB(40, 0, 40, 40),
                       child: Text(
                         "Arquivo carregado: $fileName",
-                        style: const TextStyle(fontSize: 18),
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     )
                 ],
