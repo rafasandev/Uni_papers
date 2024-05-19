@@ -18,7 +18,6 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
   String title = '';
   Map<String, String> author = {};
   String description = '';
-  String fileStr = '';
   String fileBytes = "";
   String fileName = "";
 
@@ -194,7 +193,16 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                     padding: const EdgeInsets.all(30.0),
                     child: ElevatedButton(
                       onPressed: () {
-                        (fileName, fileBytes) = savePDFArchive();
+                        List<String> valuesFile;
+                        savePDFArchive().then((value) {
+                          valuesFile = value.split(",");
+                          // List<String> valuesFile = saveResponse.split(",");
+                          setState(() {
+                            fileName = valuesFile[0];
+                            fileBytes = valuesFile[1];
+                            print(fileName);
+                          });
+                        });
                       },
                       style: TextButton.styleFrom(
                         textStyle: const TextStyle(fontSize: 20),
