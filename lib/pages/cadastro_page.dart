@@ -167,8 +167,9 @@ class _CadastroPageState extends State<CadastroPage> {
                   const SizedBox(
                     height: 20,
                   ),
-                  Row(
+                  Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
                         padding: const EdgeInsets.fromLTRB(15, 6, 15, 6),
@@ -177,7 +178,7 @@ class _CadastroPageState extends State<CadastroPage> {
                             borderRadius: BorderRadius.circular(15),
                             color: white),
                         child: const Text(
-                          "Você é:",
+                          "Escolha se você é:",
                           style: TextStyle(
                             fontSize: 18,
                           ),
