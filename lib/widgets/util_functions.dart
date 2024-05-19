@@ -87,8 +87,9 @@ Future<String> convertPDFUpload() async {
     String fileName = file.name;
 
     String decode = bytesList!.map((e) => e.toString()).join(",");
+    // print(decode);
 
-    String fileStr = "$fileName,$decode";
+    String fileStr = "$fileName v4ta4watv4et5v435te435 $decode";
 
     return fileStr;
   } else {

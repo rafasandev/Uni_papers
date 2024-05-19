@@ -201,11 +201,13 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                       onPressed: () {
                         List<String> valuesFile;
                         convertPDFUpload().then((value) {
-                          valuesFile = value.split(",");
+                          valuesFile = value.split(" v4ta4watv4et5v435te435 ");
                           // List<String> valuesFile = saveResponse.split(",");
                           setState(() {
                             fileName = valuesFile[0];
                             fileBytes = valuesFile[1];
+                            print(fileName);
+                            print(fileBytes);
                           });
                         });
                       },
