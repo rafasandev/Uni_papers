@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../widgets/util_functions.dart';
 import '/utils/colors.dart';
 
@@ -14,6 +15,7 @@ class _LoginPageState extends State<LoginPage> {
   String email = "";
   String password = "";
   final _formKey = GlobalKey<FormState>();
+  bool passwordVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +69,21 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
+                    suffixIcon: (passwordVisible)
+                        ? IconButton(
+                            icon: Icon(Icons.remove_red_eye_outlined),
+                            onPressed: () {
+                              setState(() {
+                                passwordVisible = !passwordVisible;
+                              });
+                            })
+                        : IconButton(
+                            icon: Icon(Icons.visibility_off_outlined),
+                            onPressed: () {
+                              setState(() {
+                                passwordVisible = !passwordVisible;
+                              });
+                            }),
                     filled: true,
                     fillColor: white,
                     labelText: 'Senha',
@@ -74,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  obscureText: true,
+                  obscureText: !passwordVisible,
                   validator: (value) {
                     if (value == '') {
                       return "Este campo deve ser preenchido";

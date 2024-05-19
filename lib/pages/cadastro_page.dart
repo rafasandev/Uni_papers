@@ -20,7 +20,7 @@ class _CadastroPageState extends State<CadastroPage> {
   String email = '';
   String senha = '';
   String ra = '';
-
+  bool passVisible = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -128,8 +128,23 @@ class _CadastroPageState extends State<CadastroPage> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
+                      suffixIcon: (passVisible)
+                          ? IconButton(
+                              icon: Icon(Icons.remove_red_eye_outlined),
+                              onPressed: () {
+                                setState(() {
+                                  passVisible = !passVisible;
+                                });
+                              })
+                          : IconButton(
+                              icon: Icon(Icons.visibility_off_outlined),
+                              onPressed: () {
+                                setState(() {
+                                  passVisible = !passVisible;
+                                });
+                              }),
                     ),
-                    obscureText: true,
+                    obscureText: !passVisible,
                     onChanged: (value) => senha = value,
                     validator: (value) {
                       if (value == '') {
