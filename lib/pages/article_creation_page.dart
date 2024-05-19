@@ -28,8 +28,15 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
         backgroundColor: background,
         actions: [
           ElevatedButton(
-            onPressed: () {
-              print("Checked");
+            onPressed: () async {
+              _formKey.currentState!.validate();
+              uploadPDFTreatment(
+                title,
+                author,
+                description,
+                fileBytes,
+                writerId.toString(),
+              );
             },
             style: ElevatedButton.styleFrom(
                 backgroundColor: background,
@@ -144,6 +151,9 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                             onPressed: () {
                               setState(() {
                                 countAuthors--;
+
+                                author.remove(countAuthors.toString());
+                                print(author);
                               });
                             },
                             style: ElevatedButton.styleFrom(

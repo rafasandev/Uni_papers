@@ -23,7 +23,7 @@ class Research {
         _collaborators = collaborators;
 
   factory Research.fromJson(Map<String, dynamic> json) {
-    print(json);
+    // print(json);
     return switch (json) {
       {
         "id": int id,

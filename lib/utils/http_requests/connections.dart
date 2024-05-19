@@ -108,26 +108,33 @@ Future<Writer> createWriter(String nome, String telefone, String email,
 }
 
 Future<Research> createResearch(
-    String title, String author, String description, String fileData) async {
+  String title,
+  String authorName,
+  String authorId,
+  String description,
+  String fileData,
+) async {
   final response = await http.post(
     Uri.parse(
       "https://unipapers-requests-5d1ab2edc5c0.herokuapp.com/api/researches",
     ),
     headers: <String, String>{
-      "Content-type": "application/json; char=UTF-8",
+      "Content-Type": "application/json; charset=UTF-8",
     },
     body: jsonEncode(
-      <String, String>{
+      <String, dynamic>{
         "name": title,
         "description": description,
-        "textFileName": fileData,
-        "writer": author,
+        "blobFile": fileData,
+        "writer": {"id": authorId},
+        "collaborators": authorName,
       },
     ),
   );
   if (response.statusCode == 200) {
     return Research.fromJson(json.decode(response.body));
   } else {
+    print(response.body);
     throw Exception("Falha ao criar artigo");
   }
 }
