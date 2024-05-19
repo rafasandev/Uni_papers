@@ -106,3 +106,28 @@ Future<Writer> createWriter(String nome, String telefone, String email,
     throw Exception('Falha ao criar escritor');
   }
 }
+
+Future<Research> createResearch(
+    String title, String author, String description, String fileData) async {
+  final response = await http.post(
+    Uri.parse(
+      "https://unipapers-requests-5d1ab2edc5c0.herokuapp.com/api/researches",
+    ),
+    headers: <String, String>{
+      "Content-type": "application/json; char=UTF-8",
+    },
+    body: jsonEncode(
+      <String, String>{
+        "name": title,
+        "description": description,
+        "textFileName": fileData,
+        "writer": author,
+      },
+    ),
+  );
+  if (response.statusCode == 200) {
+    return Research.fromJson(json.decode(response.body));
+  } else {
+    throw Exception("Falha ao criar artigo");
+  }
+}

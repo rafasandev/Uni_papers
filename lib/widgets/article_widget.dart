@@ -63,6 +63,8 @@ class _ArticleWidgetState extends State<ArticleWidget> {
                 Container(
                   width: double.infinity,
                   child: Text(
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
                     utf8.decode(widget.article.description.codeUnits),
                     textAlign: TextAlign.left,
                   ),
@@ -91,7 +93,7 @@ class _ArticleWidgetState extends State<ArticleWidget> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  savePDFArchive();
+                  convertPDFUpload();
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: yellow,

@@ -77,7 +77,7 @@ void loginWriter(String email, String senha, BuildContext context) {
   }
 }
 
-Future<String> savePDFArchive() async {
+Future<String> convertPDFUpload() async {
   FilePickerResult? result = await FilePicker.platform.pickFiles(
       withData: true, allowedExtensions: ["pdf"], type: FileType.custom);
 

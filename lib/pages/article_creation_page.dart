@@ -29,9 +29,20 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
       appBar: AppBar(
         backgroundColor: background,
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.check),
+          ElevatedButton(
+            onPressed: () {
+              print("Checked");
+            },
+            style: ElevatedButton.styleFrom(
+                backgroundColor: background,
+                elevation: 0,
+                foregroundColor: Colors.black),
+            child: Row(
+              children: [
+                Text("Confirmar"),
+                Icon(Icons.check),
+              ],
+            ),
           ),
         ],
       ),
@@ -40,9 +51,9 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
           children: [
             Container(
               width: double.infinity,
-              padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+              padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
               decoration: const BoxDecoration(color: yellow),
-              margin: EdgeInsets.only(bottom: 10),
+              margin: const EdgeInsets.only(bottom: 10),
               child: const Text(
                 "Upload de Artigo",
                 textAlign: TextAlign.center,
@@ -72,7 +83,6 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                       onChanged: (value) {
                         setState(() {
                           title = value;
-                          print(title);
                         });
                       },
                     ),
@@ -85,7 +95,7 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                             margin: const EdgeInsets.fromLTRB(20, 15, 20, 0),
                             child: TextFormField(
                               decoration: InputDecoration(
-                                label: Text("Autor*"),
+                                label: const Text("Autor*"),
                                 filled: true,
                                 fillColor: white,
                                 border: OutlineInputBorder(
@@ -97,7 +107,6 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                               onChanged: (value) {
                                 setState(() {
                                   author[i.toString()] = value;
-                                  print(author);
                                 });
                               },
                             ),
@@ -108,7 +117,7 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                   Row(
                     children: [
                       Container(
-                        padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
+                        padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
                         alignment: Alignment.centerLeft,
                         child: ElevatedButton(
                           onPressed: () {
@@ -131,7 +140,7 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                       ),
                       if (countAuthors > 1)
                         Container(
-                          padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
+                          padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
                           alignment: Alignment.centerLeft,
                           child: ElevatedButton(
                             onPressed: () {
@@ -159,8 +168,8 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(12, 0, 0, 0),
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(12, 0, 0, 0),
                           child: Text(
                             "Descrição*",
                             style: TextStyle(
@@ -194,13 +203,12 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                     child: ElevatedButton(
                       onPressed: () {
                         List<String> valuesFile;
-                        savePDFArchive().then((value) {
+                        convertPDFUpload().then((value) {
                           valuesFile = value.split(",");
                           // List<String> valuesFile = saveResponse.split(",");
                           setState(() {
                             fileName = valuesFile[0];
                             fileBytes = valuesFile[1];
-                            print(fileName);
                           });
                         });
                       },
@@ -216,7 +224,7 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                     Container(
                       child: Text(
                         "Arquivo carregado: $fileName",
-                        style: TextStyle(fontSize: 18),
+                        style: const TextStyle(fontSize: 18),
                       ),
                     )
                 ],

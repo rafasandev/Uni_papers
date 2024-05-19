@@ -101,7 +101,6 @@ class _ProfilePageState extends State<ProfilePage> {
                         backgroundColor: background,
                       ),
                       onPressed: () {
-                        print(widget.user);
                         Navigator.pushNamed(context, "/create_article",
                             arguments: widget.user.id);
                       },
