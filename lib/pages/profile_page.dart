@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:unipapers_project/models/entities/writer.dart';
 import 'package:unipapers_project/utils/colors.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -20,7 +21,7 @@ class _ProfilePageState extends State<ProfilePage> {
           color: background,
         ),
         alignment: Alignment.topCenter,
-        padding: const EdgeInsets.fromLTRB(40, 50, 40, 0),
+        padding: const EdgeInsets.fromLTRB(30, 50, 30, 0),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -37,37 +38,38 @@ class _ProfilePageState extends State<ProfilePage> {
                     color: yellow, borderRadius: BorderRadius.circular(20)),
                 padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
                 margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                child: Row(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    RichText(
-                      text: TextSpan(
-                        text: "Olá ",
-                        style: const TextStyle(
-                          fontSize: 28,
-                          color: Colors.black,
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Olá"),
+                        SizedBox(
+                          width: 10,
                         ),
-                        children: [
-                          TextSpan(
-                            text: widget.user.name,
-                            style: const TextStyle(
-                              fontSize: 36,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )
-                        ],
+                        Icon(
+                          Icons.waving_hand_outlined,
+                        )
+                      ],
+                    ),
+                    Text(
+                      utf8.decode(widget.user.name.codeUnits),
+                      style: const TextStyle(
+                        fontSize: 28,
+                        color: Colors.black,
                       ),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    const Icon(Icons.waving_hand_outlined)
+                      textAlign: TextAlign.center,
+                      softWrap: true,
+                    )
                   ],
                 ),
                 // child: Text("Edite seu perfil: ${widget.user!.name}"),
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: (widget.user is Writer)
+                    ? MainAxisAlignment.spaceEvenly
+                    : MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -91,29 +93,31 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                   ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.black,
-                      elevation: 0.0,
-                      backgroundColor: background,
-                    ),
-                    onPressed: () {
-                      Navigator.pushNamed(context, "/create_article",
-                          arguments: widget.user.id);
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Icon(Icons.library_add_outlined),
-                          Text(
-                            "Carregar \n Artigo",
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
+                  if (widget.user is Writer)
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.black,
+                        elevation: 0.0,
+                        backgroundColor: background,
+                      ),
+                      onPressed: () {
+                        print(widget.user);
+                        Navigator.pushNamed(context, "/create_article",
+                            arguments: widget.user.id);
+                      },
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            Icon(Icons.library_add_outlined),
+                            Text(
+                              "Carregar \n Artigo",
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
                 ],
               ),
               Container(
