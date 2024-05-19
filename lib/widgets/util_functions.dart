@@ -77,11 +77,9 @@ void loginWriter(String email, String senha, BuildContext context) {
   }
 }
 
-Future<List<String>> savePDFArchive() async {
+Future<(String, String)> savePDFArchive() async {
   FilePickerResult? result = await FilePicker.platform.pickFiles(
       withData: true, allowedExtensions: ["pdf"], type: FileType.custom);
-
-  List<String> fileInfo = [];
 
   if (result != null) {
     PlatformFile file = result.files.first;
@@ -91,14 +89,11 @@ Future<List<String>> savePDFArchive() async {
     String decode = bytesList!.map((e) => e.toString()).join(",");
 
     // saveBLOBAsPDF(decode, fileName);
-    fileInfo[0] = fileName;
-    fileInfo[1] = decode;
-    print(fileInfo);
 
-    return fileInfo;
+    return (fileName, decode);
   } else {
     // User canceled the picker
-    return [];
+    return ("Erro", "Erro");
   }
 }
 

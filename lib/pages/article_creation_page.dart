@@ -194,20 +194,7 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                     padding: const EdgeInsets.all(30.0),
                     child: ElevatedButton(
                       onPressed: () {
-                        List<String> fileInfo =
-                            savePDFArchive() as List<String>;
-                        for (var i = 0; i < fileInfo.length; i++) {
-                          if (i == 0) {
-                            setState(() {
-                              fileName = fileInfo[i];
-                            });
-                          }
-                          if (i == 1) {
-                            setState(() {
-                              fileBytes = fileInfo[i];
-                            });
-                          }
-                        }
+                        (fileName, fileBytes) = savePDFArchive();
                       },
                       style: TextButton.styleFrom(
                         textStyle: const TextStyle(fontSize: 20),
