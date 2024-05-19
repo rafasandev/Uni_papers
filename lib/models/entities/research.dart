@@ -4,28 +4,32 @@ class Research {
   int _id;
   String _title;
   String _description;
-  String _textFileName;
+  String? _blobFile;
   Writer _author;
+  String? _collaborators = '';
 
   Research({
     required int id,
     required String title,
     required String description,
-    required String textFileName,
+    required String? blobFile,
     required Writer author,
+    required String? collaborators,
   })  : _author = author,
-        _textFileName = textFileName,
+        _blobFile = blobFile,
         _description = description,
         _title = title,
-        _id = id;
+        _id = id,
+        _collaborators = collaborators;
 
   factory Research.fromJson(Map<String, dynamic> json) {
+    print(json);
     return switch (json) {
       {
         "id": int id,
         "name": String title,
         "description": String description,
-        "textFileName": String textFileName,
+        "blobFile": String? blobFile,
         "writer":
             // Writer author,
             {
@@ -36,13 +40,14 @@ class Research {
           "password": String passwordWriter,
           "course": String courseWriter,
           "ra": String raWriter,
-        }
+        },
+        "collaborators": String? collaborators,
       } =>
         Research(
           id: id,
           title: title,
           description: description,
-          textFileName: textFileName,
+          blobFile: blobFile,
           author: Writer(
             id: idWriter,
             name: nameWriter,
@@ -52,6 +57,7 @@ class Research {
             course: courseWriter,
             ra: raWriter,
           ),
+          collaborators: collaborators,
         ),
       _ => throw const FormatException('Failed to load research.'),
     };
@@ -75,15 +81,21 @@ class Research {
     _description = value;
   }
 
-  String get textFileName => _textFileName;
+  // String get blobFile => _blobFile;
 
-  set textFileName(String value) {
-    _textFileName = value;
+  set blobFile(String value) {
+    _blobFile = value;
   }
 
   Writer get author => _author;
 
   set author(Writer value) {
     _author = value;
+  }
+
+  // String get collaborators => _collaborators;
+
+  set collaborators(String value) {
+    _collaborators = value;
   }
 }
