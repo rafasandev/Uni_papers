@@ -31,10 +31,14 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
           ElevatedButton(
             onPressed: () async {
               _formKey.currentState!.validate();
-              if (fileBytes != "" && fileName != "") {
+              String authorsString = "";
+              for (var authorName in author.values) {
+                authorsString += "$authorName---";
+              }
+              if (fileBytes != "" && fileName != "" && authorsString != "") {
                 createResearch(
                   title,
-                  author,
+                  authorsString,
                   description,
                   fileBytes,
                   writerId.toString(),

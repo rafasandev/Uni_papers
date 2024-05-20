@@ -111,15 +111,11 @@ Future<Writer> createWriter(String nome, String telefone, String email,
 
 Future<Research> createResearch(
   String title,
-  Map<String, String> authorName,
+  String authorName,
   String description,
   String fileBytes,
   String authorId,
 ) async {
-  String authorsString = "";
-  for (var authorName in authorName.values) {
-    authorsString += "$authorName---";
-  }
   final response = await http.post(
     Uri.parse(
       'https://unipapers-requests-5d1ab2edc5c0.herokuapp.com/api/researches',
@@ -133,7 +129,7 @@ Future<Research> createResearch(
         "description": description,
         "blobFile": fileBytes,
         "writer": {"id": authorId},
-        "collaborators": authorsString,
+        "collaborators": authorName,
       },
     ),
   );
