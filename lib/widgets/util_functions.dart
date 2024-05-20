@@ -122,28 +122,6 @@ Future<void> saveBLOBAsPDF(String bytes, String fileName) async {
   }
 }
 
-void uploadPDFTreatment(
-  String title,
-  Map<String, String> author,
-  String description,
-  String fileBytes,
-  String writerId,
-) async {
-  String authorsString = "";
-  for (var authorName in author.values) {
-    authorsString += "$authorName --- ";
-  }
-
-  print(authorsString);
-
-  await createResearch(
-    title,
-    authorsString,
-    writerId,
-    description,
-    fileBytes,
-  );
-}
 
 // List<Research> getResearches() {
 //   late List<Research> researches;

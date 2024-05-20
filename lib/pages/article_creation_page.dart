@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unipapers_project/utils/colors.dart';
+import 'package:unipapers_project/utils/http_requests/connections.dart';
 import 'package:unipapers_project/widgets/util_functions.dart';
 
 class ArticleCreationPage extends StatefulWidget {
@@ -30,13 +31,15 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
           ElevatedButton(
             onPressed: () async {
               _formKey.currentState!.validate();
-              uploadPDFTreatment(
-                title,
-                author,
-                description,
-                fileBytes,
-                writerId.toString(),
-              );
+              if (fileBytes != "" && fileName != "") {
+                createResearch(
+                  title,
+                  author,
+                  description,
+                  fileBytes,
+                  writerId.toString(),
+                );
+              }
             },
             style: ElevatedButton.styleFrom(
                 backgroundColor: background,
@@ -205,8 +208,19 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                       ],
                     ),
                   ),
+                  if (fileName != "")
+                    Container(
+                      padding: const EdgeInsets.fromLTRB(40, 20, 40, 20),
+                      child: Text(
+                        "Arquivo carregado: $fileName",
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   Container(
-                    padding: const EdgeInsets.all(30.0),
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
                     child: ElevatedButton(
                       onPressed: () {
                         List<String> valuesFile;
@@ -229,17 +243,6 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                       child: const Text("Carregar arquivo PDF"),
                     ),
                   ),
-                  if (fileName != "")
-                    Container(
-                      padding: const EdgeInsets.fromLTRB(40, 0, 40, 40),
-                      child: Text(
-                        "Arquivo carregado: $fileName",
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    )
                 ],
               ),
             ),

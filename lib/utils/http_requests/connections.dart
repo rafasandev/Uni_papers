@@ -90,14 +90,16 @@ Future<Writer> createWriter(String nome, String telefone, String email,
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
-    body: jsonEncode(<String, String>{
-      'name': nome,
-      'phone': telefone,
-      'email': email,
-      'password': senha,
-      'course': curso,
-      'ra': ra,
-    }),
+    body: jsonEncode(
+      <String, String>{
+        'name': nome,
+        'phone': telefone,
+        'email': email,
+        'password': senha,
+        'course': curso,
+        'ra': ra,
+      },
+    ),
   );
 
   if (response.statusCode == 201) {
@@ -109,29 +111,33 @@ Future<Writer> createWriter(String nome, String telefone, String email,
 
 Future<Research> createResearch(
   String title,
-  String authorName,
-  String authorId,
+  Map<String, String> authorName,
   String description,
-  String fileData,
+  String fileBytes,
+  String authorId,
 ) async {
+  String authorsString = "";
+  for (var authorName in authorName.values) {
+    authorsString += "$authorName---";
+  }
   final response = await http.post(
     Uri.parse(
-      "https://unipapers-requests-5d1ab2edc5c0.herokuapp.com/api/researches",
+      'https://unipapers-requests-5d1ab2edc5c0.herokuapp.com/api/researches',
     ),
     headers: <String, String>{
-      "Content-Type": "application/json; charset=UTF-8",
+      'Content-Type': 'application/json; charset=UTF-8',
     },
     body: jsonEncode(
       <String, dynamic>{
         "name": title,
         "description": description,
-        "blobFile": fileData,
+        "blobFile": fileBytes,
         "writer": {"id": authorId},
-        "collaborators": authorName,
+        "collaborators": authorsString,
       },
     ),
   );
-  if (response.statusCode == 200) {
+  if (response.statusCode == 201) {
     return Research.fromJson(json.decode(response.body));
   } else {
     print(response.body);
