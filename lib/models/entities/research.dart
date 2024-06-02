@@ -81,9 +81,9 @@ class Research {
     _description = value;
   }
 
-  // String get blobFile => _blobFile;
+  String? get blobFile => _blobFile;
 
-  set blobFile(String value) {
+  set blobFile(String? value) {
     _blobFile = value;
   }
 

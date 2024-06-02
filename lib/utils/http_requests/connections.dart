@@ -110,12 +110,21 @@ Future<Writer> createWriter(String nome, String telefone, String email,
 }
 
 Future<Research> createResearch(
-  String title,
-  String authorName,
-  String description,
-  String fileBytes,
-  String authorId,
+  final String title,
+  final String authorName,
+  final String description,
+  final String fileBytes,
+  final String authorId,
 ) async {
+  print(fileBytes);
+  Map<String, dynamic> body = {
+    "name": title,
+    "description": description,
+    "blobFile": fileBytes,
+    "writer": {"id": authorId},
+    "collaborators": authorName,
+  };
+  print(jsonEncode(body));
   final response = await http.post(
     Uri.parse(
       'https://unipapers-requests-5d1ab2edc5c0.herokuapp.com/api/researches',
@@ -123,15 +132,7 @@ Future<Research> createResearch(
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
-    body: jsonEncode(
-      <String, dynamic>{
-        "name": title,
-        "description": description,
-        "blobFile": fileBytes,
-        "writer": {"id": authorId},
-        "collaborators": authorName,
-      },
-    ),
+    body: jsonEncode(body),
   );
   if (response.statusCode == 201) {
     return Research.fromJson(json.decode(response.body));
