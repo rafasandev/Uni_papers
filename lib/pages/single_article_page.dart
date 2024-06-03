@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:unipapers_project/models/entities/research.dart';
 import 'package:unipapers_project/utils/colors.dart';
+import 'package:unipapers_project/widgets/util_functions.dart';
 
 class SingleArticlePage extends StatelessWidget {
   const SingleArticlePage({super.key});
@@ -110,7 +111,9 @@ class SingleArticlePage extends StatelessWidget {
                 width: double.infinity,
                 margin: const EdgeInsets.fromLTRB(0, 70, 0, 70),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    saveBLOBAsPDF(article.blobFile, article.title);
+                  },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: blue,
                       side: const BorderSide(
