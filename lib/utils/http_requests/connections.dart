@@ -111,7 +111,7 @@ Future<Writer> createWriter(String nome, String telefone, String email,
 
 Future<Research> createResearch(
   String title,
-  String authorName,
+  String collaborators,
   String description,
   String fileBytes,
   String authorId,
@@ -129,7 +129,7 @@ Future<Research> createResearch(
         "description": description,
         "blobFile": fileBytes,
         "writer": {"id": authorId},
-        "collaborators": authorName,
+        "collaborators": collaborators,
       },
     ),
   );
