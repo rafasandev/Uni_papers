@@ -81,13 +81,12 @@ Future<String> convertPDFUpload() async {
   FilePickerResult? result = await FilePicker.platform.pickFiles(
       withData: true, allowedExtensions: ["pdf"], type: FileType.custom);
 
+  FilePickerStatus.done;
   if (result != null) {
     PlatformFile file = result.files.first;
     Uint8List? bytesList = file.bytes;
     String fileName = file.name;
-
     String decode = bytesList!.map((e) => e.toString()).join(",");
-    // print(decode);
 
     String fileStr = "$fileName v4ta4watv4et5v435te435 $decode";
 
@@ -103,19 +102,22 @@ List<int> convertStringToBytes(String bytes) {
   return bytesList;
 }
 
-Future<void> saveBLOBAsPDF(String bytes, String fileName) async {
+Future<void> saveBLOBAsPDF(String? bytes, String fileName) async {
   try {
     if (!kIsWeb) {
-      final directory = await getTemporaryDirectory();
-      final filePath = '${directory.path}/$fileName';
+      print("Olá");
+      final file = File('${fileName.replaceAll(' ', '-')}');
+      await file.writeAsBytes(convertStringToBytes(bytes!));
+      // final directory = await getTemporaryDirectory();
 
-      final file = File(filePath);
-      await file.writeAsBytes(convertStringToBytes(bytes));
+      // final filePath = '${directory.path}/${fileName.replaceAll(' ', '-')}';
+      // final file = File(filePath);
+      // await file.writeAsBytes(convertStringToBytes(bytes!));
 
-      if (Platform.isAndroid || Platform.isIOS) {
-        print("PDF salvo em: $filePath");
-        OpenFile.open(filePath);
-      }
+      // if (Platform.isAndroid || Platform.isIOS) {
+      //   print("PDF salvo");
+      //   OpenFile.open(filePath);
+      // }
     }
   } catch (e) {
     print(e);
