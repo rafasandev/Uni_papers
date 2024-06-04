@@ -1,4 +1,4 @@
-# unipapers_collab_proj
+# unipapers_project
 
 A new Flutter project.
 

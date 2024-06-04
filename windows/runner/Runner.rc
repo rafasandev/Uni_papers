@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "unipapers_collab_proj" "\0"
+            VALUE "FileDescription", "unipapers_project" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "unipapers_collab_proj" "\0"
+            VALUE "InternalName", "unipapers_project" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2024 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "unipapers_collab_proj.exe" "\0"
-            VALUE "ProductName", "unipapers_collab_proj" "\0"
+            VALUE "OriginalFilename", "unipapers_project.exe" "\0"
+            VALUE "ProductName", "unipapers_project" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

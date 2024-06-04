@@ -1,6 +1,6 @@
 {
-    "name": "unipapers_collab_proj",
-    "short_name": "unipapers_collab_proj",
+    "name": "unipapers_project",
+    "short_name": "unipapers_project",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
