@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import '/models/entities/research.dart';
-import '/widgets/util_functions.dart';
 
 import '../widgets/article_widget.dart';
 import '../utils/http_requests/connections.dart';
