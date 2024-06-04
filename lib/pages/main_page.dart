@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:unipapers_project/pages/home_page.dart';
-import 'package:unipapers_project/pages/profile_page.dart';
-import 'package:unipapers_project/pages/search_page.dart';
+import '/pages/home_page.dart';
+import '/pages/profile_page.dart';
+import '/pages/search_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});

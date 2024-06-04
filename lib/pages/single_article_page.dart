@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:unipapers_project/models/entities/research.dart';
-import 'package:unipapers_project/utils/colors.dart';
-import 'package:unipapers_project/widgets/util_functions.dart';
+import '/models/entities/research.dart';
+import '/utils/colors.dart';
+import '/widgets/util_functions.dart';
 
 class SingleArticlePage extends StatelessWidget {
   const SingleArticlePage({super.key});

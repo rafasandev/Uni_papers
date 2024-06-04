@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:unipapers_project/utils/colors.dart';
-import 'package:unipapers_project/utils/courses_list.dart';
-import 'package:unipapers_project/utils/http_requests/connections.dart';
+import '/utils/colors.dart';
+import '/utils/courses_list.dart';
+import '/utils/http_requests/connections.dart';
 
 class CadastroPage extends StatefulWidget {
   const CadastroPage({super.key});

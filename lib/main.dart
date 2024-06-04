@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:unipapers_project/pages/article_creation_page.dart';
-import 'package:unipapers_project/pages/cadastro_page.dart';
-import 'package:unipapers_project/pages/edit_profile_page.dart';
-import 'package:unipapers_project/pages/login_page.dart';
-import 'package:unipapers_project/pages/main_page.dart';
-import 'package:unipapers_project/pages/single_article_page.dart';
-import 'package:unipapers_project/utils/colors.dart';
+import '/pages/article_creation_page.dart';
+import '/pages/cadastro_page.dart';
+import '/pages/edit_profile_page.dart';
+import '/pages/login_page.dart';
+import '/pages/main_page.dart';
+import '/pages/single_article_page.dart';
+import '/utils/colors.dart';
 
 void main() {
   runApp(const MyApp());

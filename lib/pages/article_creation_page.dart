@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:unipapers_project/utils/colors.dart';
-import 'package:unipapers_project/utils/http_requests/connections.dart';
-import 'package:unipapers_project/widgets/util_functions.dart';
+import '/utils/colors.dart';
+import '/utils/http_requests/connections.dart';
+import '/widgets/util_functions.dart';
 
 class ArticleCreationPage extends StatefulWidget {
   const ArticleCreationPage({super.key});

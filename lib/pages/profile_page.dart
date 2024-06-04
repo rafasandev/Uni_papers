@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:unipapers_project/models/entities/writer.dart';
-import 'package:unipapers_project/utils/colors.dart';
+import '/models/entities/writer.dart';
+import '/utils/colors.dart';
 
 class ProfilePage extends StatefulWidget {
   final user;

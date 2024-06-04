@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:unipapers_project/models/entities/reader.dart';
-import 'package:unipapers_project/models/entities/research.dart';
-import 'package:unipapers_project/models/entities/writer.dart';
+import '/models/entities/reader.dart';
+import '/models/entities/research.dart';
+import '/models/entities/writer.dart';
 
 Future<Reader> fetchReaderWithEmail(String email) async {
   final response = await http.get(Uri.parse(
