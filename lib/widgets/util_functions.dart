@@ -13,6 +13,8 @@ import '../models/entities/research.dart';
 import '../models/entities/writer.dart';
 import '../utils/http_requests/connections.dart';
 
+import 'package:document_file_save_plus/document_file_save_plus.dart';
+
 Future<void> alertError(String text, BuildContext context) async {
   return showDialog(
     context: context,
@@ -97,27 +99,45 @@ Future<String> convertPDFUpload() async {
 }
 
 List<int> convertStringToBytes(String bytes) {
-  List<int> bytesList = bytes.split(",").map((e) => int.parse(e)).toList();
+  // Remove quaisquer espaços em branco extras
+  bytes = bytes.replaceAll(RegExp(r'\s+'), '') + ",";
+  print(bytes);
 
-  return bytesList;
+  List<int> listBytes = [];
+
+  while (bytes != "") {
+    String caracteresAteProximaVirgula = bytes.substring(0, bytes.indexOf(","));
+    print(caracteresAteProximaVirgula);
+    listBytes.add(int.parse(caracteresAteProximaVirgula));
+
+    bytes = bytes.replaceFirst(caracteresAteProximaVirgula, "");
+    bytes = bytes.replaceFirst(bytes.substring(0, bytes.indexOf(",") + 1), "");
+    print(bytes);
+  }
+  if (bytes == "") {
+    print(listBytes);
+    return listBytes;
+  } else {
+    return [];
+  }
+  // return [];
 }
 
 Future<void> saveBLOBAsPDF(String? bytes, String fileName) async {
   try {
     if (!kIsWeb) {
-      print("Olá");
-      final file = File('${fileName.replaceAll(' ', '-')}');
-      await file.writeAsBytes(convertStringToBytes(bytes!));
-      // final directory = await getTemporaryDirectory();
+      final directory = await getTemporaryDirectory();
+      String newFileName = utf8.decode(fileName.replaceAll(" ", "_").codeUnits);
+      final file = File("${directory.path}/$newFileName.pdf");
 
-      // final filePath = '${directory.path}/${fileName.replaceAll(' ', '-')}';
-      // final file = File(filePath);
-      // await file.writeAsBytes(convertStringToBytes(bytes!));
+      // List<int> bytesList = convertStringToBytes(bytes!);
+      // print('Lista de bytes: $bytesList');
 
-      // if (Platform.isAndroid || Platform.isIOS) {
-      //   print("PDF salvo");
-      //   OpenFile.open(filePath);
-      // }
+      Uint8List data = Uint8List.fromList(convertStringToBytes(bytes!));
+
+      DocumentFileSavePlus().saveFile(data, newFileName, "text.pdf");
+      print("PDF salvo em ${directory.path}/$newFileName.pdf");
+      OpenFile.open('${directory.path}/$newFileName.pdf');
     }
   } catch (e) {
     print(e);
