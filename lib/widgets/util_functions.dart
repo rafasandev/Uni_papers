@@ -103,33 +103,8 @@ Future<String> convertPDFUpload() async {
   }
 }
 
-// List<int> convertStringToBytes(String bytes) {
-//   // Remove quaisquer espaços em branco extras
-//   bytes = bytes.replaceAll(RegExp(r'\s+'), '') + ",";
-//   print(bytes);
-
-//   List<int> listBytes = [];
-
-//   while (bytes != "") {
-//     String caracteresAteProximaVirgula = bytes.substring(0, bytes.indexOf(","));
-//     print(caracteresAteProximaVirgula);
-//     listBytes.add(int.parse(caracteresAteProximaVirgula));
-
-//     bytes = bytes.replaceFirst(caracteresAteProximaVirgula, "");
-//     bytes = bytes.replaceFirst(bytes.substring(0, bytes.indexOf(",") + 1), "");
-//     print(bytes);
-//   }
-//   if (bytes == "") {
-//     print(listBytes);
-//     return listBytes;
-//   } else {
-//     return [];
-//   }
-//   // return [];
-// }
-
 Future<Uint8List> decodeBase64ToList(String base64Str) async {
-  return await Future.microtask(() => base64Decode(base64Str));
+  return await Future.microtask(() => (base64Decode(base64Str)));
 }
 
 Future<void> saveBLOBAsPDF(String? base64Str, String fileName) async {
@@ -140,14 +115,14 @@ Future<void> saveBLOBAsPDF(String? base64Str, String fileName) async {
       final file = File("${directory.path}/$newFileName.pdf");
 
       print(base64Str);
-
-      // List<int> bytesList = convertStringToBytes(bytes!);
       Uint8List data = await decodeBase64ToList(base64Str!);
-      print("Lista from base64: $data");
+      print(data);
 
-      // DocumentFileSavePlus().saveFile(data, newFileName, "text.pdf");
-      // print("PDF salvo em ${directory.path}/$newFileName.pdf");
-      // OpenFile.open('${directory.path}/$newFileName.pdf');
+      file.writeAsBytesSync(data);
+
+      DocumentFileSavePlus().saveFile(data, newFileName, "text.pdf");
+      print("PDF salvo em ${directory.path}/$newFileName.pdf");
+      OpenFile.open('${directory.path}/$newFileName.pdf');
     }
   } catch (e) {
     print(e);
