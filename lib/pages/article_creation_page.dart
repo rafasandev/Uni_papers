@@ -17,7 +17,7 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
   String title = '';
   Map<String, String> author = {};
   String description = '';
-  String fileBytes = "";
+  String fileBase64 = "";
   String fileName = "";
 
   @override
@@ -35,12 +35,12 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
               for (var authorName in author.values) {
                 collaborators += "$authorName---";
               }
-              if (fileBytes != "" && fileName != "" && collaborators != "") {
+              if (fileBase64 != "" && fileName != "" && collaborators != "") {
                 await createResearch(
                   title,
                   collaborators,
                   description,
-                  fileBytes,
+                  fileBase64,
                   writerId.toString(),
                 );
               }
@@ -232,7 +232,7 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                           valuesFile = value.split(" v4ta4watv4et5v435te435 ");
                           setState(() {
                             fileName = valuesFile[0];
-                            fileBytes = valuesFile[1];
+                            fileBase64 = valuesFile[1];
                           });
                         });
                       },

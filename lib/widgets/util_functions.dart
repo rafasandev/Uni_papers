@@ -86,11 +86,16 @@ Future<String> convertPDFUpload() async {
   FilePickerStatus.done;
   if (result != null) {
     PlatformFile file = result.files.first;
-    Uint8List? bytesList = file.bytes;
-    String fileName = file.name;
-    String decode = bytesList!.map((e) => e.toString()).join(",");
+    Uint8List bytesList = file.bytes!;
 
-    String fileStr = "$fileName v4ta4watv4et5v435te435 $decode";
+    String base64Str = base64Encode(bytesList);
+
+    print("String de base 64: $base64Str");
+
+    String fileName = file.name;
+    // String decode = bytesList.map((e) => e.toString()).join(",");
+
+    String fileStr = "$fileName v4ta4watv4et5v435te435 $base64Str";
 
     return fileStr;
   } else {
@@ -98,52 +103,56 @@ Future<String> convertPDFUpload() async {
   }
 }
 
-List<int> convertStringToBytes(String bytes) {
-  // Remove quaisquer espaços em branco extras
-  bytes = bytes.replaceAll(RegExp(r'\s+'), '') + ",";
-  print(bytes);
+// List<int> convertStringToBytes(String bytes) {
+//   // Remove quaisquer espaços em branco extras
+//   bytes = bytes.replaceAll(RegExp(r'\s+'), '') + ",";
+//   print(bytes);
 
-  List<int> listBytes = [];
+//   List<int> listBytes = [];
 
-  while (bytes != "") {
-    String caracteresAteProximaVirgula = bytes.substring(0, bytes.indexOf(","));
-    print(caracteresAteProximaVirgula);
-    listBytes.add(int.parse(caracteresAteProximaVirgula));
+//   while (bytes != "") {
+//     String caracteresAteProximaVirgula = bytes.substring(0, bytes.indexOf(","));
+//     print(caracteresAteProximaVirgula);
+//     listBytes.add(int.parse(caracteresAteProximaVirgula));
 
-    bytes = bytes.replaceFirst(caracteresAteProximaVirgula, "");
-    bytes = bytes.replaceFirst(bytes.substring(0, bytes.indexOf(",") + 1), "");
-    print(bytes);
-  }
-  if (bytes == "") {
-    print(listBytes);
-    return listBytes;
-  } else {
-    return [];
-  }
-  // return [];
+//     bytes = bytes.replaceFirst(caracteresAteProximaVirgula, "");
+//     bytes = bytes.replaceFirst(bytes.substring(0, bytes.indexOf(",") + 1), "");
+//     print(bytes);
+//   }
+//   if (bytes == "") {
+//     print(listBytes);
+//     return listBytes;
+//   } else {
+//     return [];
+//   }
+//   // return [];
+// }
+
+Future<Uint8List> decodeBase64ToList(String base64Str) async {
+  return await Future.microtask(() => base64Decode(base64Str));
 }
 
-Future<void> saveBLOBAsPDF(String? bytes, String fileName) async {
+Future<void> saveBLOBAsPDF(String? base64Str, String fileName) async {
   try {
     if (!kIsWeb) {
       final directory = await getTemporaryDirectory();
       String newFileName = utf8.decode(fileName.replaceAll(" ", "_").codeUnits);
       final file = File("${directory.path}/$newFileName.pdf");
 
+      print(base64Str);
+
       // List<int> bytesList = convertStringToBytes(bytes!);
-      // print('Lista de bytes: $bytesList');
+      Uint8List data = await decodeBase64ToList(base64Str!);
+      print("Lista from base64: $data");
 
-      Uint8List data = Uint8List.fromList(convertStringToBytes(bytes!));
-
-      DocumentFileSavePlus().saveFile(data, newFileName, "text.pdf");
-      print("PDF salvo em ${directory.path}/$newFileName.pdf");
-      OpenFile.open('${directory.path}/$newFileName.pdf');
+      // DocumentFileSavePlus().saveFile(data, newFileName, "text.pdf");
+      // print("PDF salvo em ${directory.path}/$newFileName.pdf");
+      // OpenFile.open('${directory.path}/$newFileName.pdf');
     }
   } catch (e) {
     print(e);
   }
 }
-
 
 // List<Research> getResearches() {
 //   late List<Research> researches;

@@ -113,14 +113,14 @@ Future<Research> createResearch(
   final String title,
   final String authorName,
   final String description,
-  final String fileBytes,
+  final String fileBase64,
   final String authorId,
 ) async {
-  print(fileBytes);
+  print(fileBase64);
   Map<String, dynamic> body = {
     "name": title,
     "description": description,
-    "blobFile": fileBytes,
+    "blobFile": fileBase64,
     "writer": {"id": authorId},
     "collaborators": authorName,
   };
@@ -135,6 +135,7 @@ Future<Research> createResearch(
     body: jsonEncode(body),
   );
   if (response.statusCode == 201) {
+    print("Artigo criado com sucesso");
     return Research.fromJson(json.decode(response.body));
   } else {
     print(response.body);
