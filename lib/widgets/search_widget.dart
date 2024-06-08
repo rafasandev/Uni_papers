@@ -36,7 +36,8 @@ class SearchWidget extends StatelessWidget {
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
-                    return ArticleWidget(article: researches[index]);
+                    return ArticleWidget(
+                        article: researches.reversed.toList()[index]);
                   },
                   itemCount: researches!.length,
                 ),
