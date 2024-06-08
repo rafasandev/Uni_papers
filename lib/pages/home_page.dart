@@ -32,6 +32,8 @@ class _HomePageState extends State<HomePage> {
               return Center(child: Text('Error: ${snapshot.error}'));
             } else {
               List<Research> researches = snapshot.data!;
+              researches = researches.reversed.toList();
+
               if (snapshot.hasData) {
                 return Column(
                   children: [

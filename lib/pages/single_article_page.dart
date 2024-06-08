@@ -31,7 +31,7 @@ class SingleArticlePage extends StatelessWidget {
                 width: double.infinity,
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: Text(
-                  utf8.decode(article.title.toUpperCase().codeUnits),
+                  utf8.decode(article.title.codeUnits),
                   style: const TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
@@ -115,7 +115,7 @@ class SingleArticlePage extends StatelessWidget {
                     saveBLOBAsPDF(article.blobFile, article.title);
                   },
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: blue,
+                      backgroundColor: yellow,
                       side: const BorderSide(
                         color: Colors.black,
                         width: 2,
@@ -125,7 +125,7 @@ class SingleArticlePage extends StatelessWidget {
                     child: const Text(
                       "Baixar artigo em PDF",
                       style: TextStyle(
-                        color: white,
+                        color: Colors.black,
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
                       ),

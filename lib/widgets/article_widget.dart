@@ -39,23 +39,23 @@ class _ArticleWidgetState extends State<ArticleWidget> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-            child: Column(
-              children: [
-                Container(
-                  width: double.infinity,
-                  child: Text(
-                    "Autor: ${utf8.decode(widget.article.author.name.codeUnits)}",
-                    textAlign: TextAlign.left,
-                    style: const TextStyle(
-                      fontStyle: FontStyle.italic,
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+          //   child: Column(
+          //     children: [
+          //       Container(
+          //         width: double.infinity,
+          //         child: Text(
+          //           "Autor: ${utf8.decode(widget.article.author.name.codeUnits)}",
+          //           textAlign: TextAlign.left,
+          //           style: const TextStyle(
+          //             fontStyle: FontStyle.italic,
+          //           ),
+          //         ),
+          //       )
+          //     ],
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 10, 0, 15),
             child: Column(
@@ -93,7 +93,7 @@ class _ArticleWidgetState extends State<ArticleWidget> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  convertPDFUpload();
+                  saveBLOBAsPDF(widget.article.blobFile, widget.article.title);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: yellow,

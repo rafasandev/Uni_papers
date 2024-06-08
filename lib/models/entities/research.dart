@@ -93,9 +93,9 @@ class Research {
     _author = value;
   }
 
-  // String get collaborators => _collaborators;
+  String? get collaborators => _collaborators;
 
-  set collaborators(String value) {
+  set collaborators(String? value) {
     _collaborators = value;
   }
 }
