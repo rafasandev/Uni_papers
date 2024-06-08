@@ -13,7 +13,14 @@ Future<Reader> fetchReaderWithEmail(String email) async {
     // Servidor respondeu OK, ou seja, deu bom :)
     return Reader.fromJson(json.decode(response.body) as Map<String, dynamic>);
   } else {
-    throw Exception('Usuário não encontrado');
+    Reader reader = Reader(
+      id: 0,
+      name: 'ERRO',
+      phone: '',
+      email: '',
+      password: 'ERRO',
+    );
+    return reader;
   }
 }
 
@@ -25,7 +32,16 @@ Future<Writer> fetchWriterWithEmail(String email) async {
     // Servidor respondeu OK, ou seja, deu bom :)
     return Writer.fromJson(json.decode(response.body) as Map<String, dynamic>);
   } else {
-    throw Exception('Usuário não encontrado');
+    Writer writer = Writer(
+      id: 0,
+      name: 'ERRO',
+      phone: '',
+      email: '',
+      password: 'ERRO',
+      course: '',
+      ra: '',
+    );
+    return writer;
   }
 }
 

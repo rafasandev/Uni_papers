@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
@@ -9,7 +8,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 import '../models/entities/reader.dart';
-import '../models/entities/research.dart';
 import '../models/entities/writer.dart';
 import '../utils/http_requests/connections.dart';
 
@@ -36,47 +34,39 @@ Future<void> alertError(String text, BuildContext context) async {
 
 void loginReader(String email, String password, BuildContext context) {
   late Reader user;
-  try {
-    fetchReaderWithEmail(email).then((reader) {
-      user = reader;
-      if (reader != null && reader.password == password) {
-        Navigator.pushNamed(
-          context,
-          '/main_page',
-          arguments: user,
-        );
-      } else {
-        alertError('Email ou senha inválidos', context);
-      }
-    }).catchError((error) {
-      alertError('Email inválido', context);
-    });
-  } catch (e) {
-    alertError('Usuário não encontrado', context);
-  }
+  fetchReaderWithEmail(email).then((reader) {
+    user = reader;
+    if (reader.password == password) {
+      Navigator.pushNamed(
+        context,
+        '/main_page',
+        arguments: user,
+      );
+    } else if (reader.name == 'ERRO' && reader.password == 'ERRO') {
+      alertError('Leitor não encontrado', context);
+    } else {
+      alertError('Email ou senha inválidos', context);
+    }
+  });
 }
 
 void loginWriter(String email, String senha, BuildContext context) {
   late Writer user;
-  try {
-    fetchWriterWithEmail(email).then((writer) {
-      user = writer;
-      if (writer != null && writer.password == senha) {
-        Navigator.pushNamed(
-          context,
-          '/main_page',
-          arguments: user,
-          //TODO: Trocar isso por um Provider
-        );
-      } else {
-        alertError('Email ou senha inválidos', context);
-      }
-    }).catchError((error) {
-      alertError('Email inválido', context);
-    });
-  } catch (e) {
-    alertError('Usuário não encontrado', context);
-  }
+  fetchWriterWithEmail(email).then((writer) {
+    user = writer;
+    if (writer.password == senha) {
+      Navigator.pushNamed(
+        context,
+        '/main_page',
+        arguments: user,
+        //TODO: Trocar isso por um Provider
+      );
+    } else if (writer.name == 'ERRO' && writer.password == 'ERRO') {
+      alertError('Escritor não encontrado', context);
+    } else {
+      alertError('Email ou senha inválidos', context);
+    }
+  });
 }
 
 Future<String> convertPDFUpload() async {

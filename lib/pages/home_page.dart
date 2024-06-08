@@ -47,7 +47,8 @@ class _HomePageState extends State<HomePage> {
                         child: ListView.builder(
                           itemCount: researches.length,
                           itemBuilder: (context, index) {
-                            return ArticleWidget(article: researches[index]);
+                            return ArticleWidget(
+                                article: researches.reversed.toList()[index]);
                           },
                         ),
                       ),
