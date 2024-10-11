@@ -35,7 +35,7 @@ class _MainPageState extends State<MainPage> {
             user: user,
           );
         }
-        return Text("Erro");
+        return const Text("Erro");
       })),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (value) {

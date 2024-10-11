@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import '/utils/colors.dart';
 import '/utils/courses_list.dart';
 import '/utils/http_requests/connections.dart';
+import 'package:easy_mask/easy_mask.dart';
 
 class CadastroPage extends StatefulWidget {
   const CadastroPage({super.key});
@@ -63,8 +64,10 @@ class _CadastroPageState extends State<CadastroPage> {
                     ),
                     onChanged: (value) => nome = value,
                     validator: (value) {
-                      if (value == '') {
+                      if (value == '' || value == null) {
                         return "Este campo deve ser preenchido";
+                      } else if (value.contains(RegExp(r'[0-9]'))) {
+                        return "Insira um nome válido";
                       }
                       return null;
                     },
@@ -75,9 +78,9 @@ class _CadastroPageState extends State<CadastroPage> {
                   TextFormField(
                     keyboardType: TextInputType.number,
                     inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.digitsOnly
+                      FilteringTextInputFormatter.digitsOnly,
+                      TextInputMask(mask: '(99) 99999-9999'),
                     ],
-                    maxLength: 11,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: white,
@@ -88,7 +91,7 @@ class _CadastroPageState extends State<CadastroPage> {
                     ),
                     onChanged: (value) => telefone = value,
                     validator: (value) {
-                      if (value == '') {
+                      if (value == '' || value == null) {
                         return "Este campo deve ser preenchido";
                       }
                       return null;
@@ -108,10 +111,10 @@ class _CadastroPageState extends State<CadastroPage> {
                     ),
                     onChanged: (value) => email = value,
                     validator: (value) {
-                      if (value == '') {
+                      if (value == '' || value == null) {
                         return "Este campo deve ser preenchido";
                       }
-                      if (!value!.contains("@")) {
+                      if (!value.contains("@")) {
                         return "Insira um email válido";
                       }
                       return null;
@@ -130,14 +133,14 @@ class _CadastroPageState extends State<CadastroPage> {
                       ),
                       suffixIcon: (passVisible)
                           ? IconButton(
-                              icon: Icon(Icons.remove_red_eye_outlined),
+                              icon: const Icon(Icons.remove_red_eye_outlined),
                               onPressed: () {
                                 setState(() {
                                   passVisible = !passVisible;
                                 });
                               })
                           : IconButton(
-                              icon: Icon(Icons.visibility_off_outlined),
+                              icon: const Icon(Icons.visibility_off_outlined),
                               onPressed: () {
                                 setState(() {
                                   passVisible = !passVisible;
@@ -147,13 +150,14 @@ class _CadastroPageState extends State<CadastroPage> {
                     obscureText: !passVisible,
                     onChanged: (value) => senha = value,
                     validator: (value) {
-                      if (value == '') {
+                      if (value == '' || value == null) {
                         return "Este campo deve ser preenchido";
                       }
-                      if (value!.length < 6) {
+                      if (value.length < 8) {
                         return "Sua senha deve conter pelo menos 8 caracteres";
                       }
-                      if (!value.contains(RegExp(r'[0-9]'))) {
+                      if (!value.contains(RegExp(r'[0-9]')) ||
+                          !value.contains(RegExp(r'[a-z]'))) {
                         return "Sua senha deve conter letras e números";
                       }
                       return null;
@@ -262,7 +266,9 @@ class _CadastroPageState extends State<CadastroPage> {
                             ),
                             onChanged: (value) => ra = value,
                             validator: (value) {
-                              if (value == '' && userSelected == 1) {
+                              if (value == '' ||
+                                  userSelected == 1 ||
+                                  value == null) {
                                 return "Este campo deve ser preenchido";
                               }
                               return null;

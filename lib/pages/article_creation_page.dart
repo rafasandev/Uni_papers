@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:unipapers_project/models/entities/research.dart';
+import '/models/entities/research.dart';
 import '/utils/colors.dart';
 import '/utils/http_requests/connections.dart';
 import '/widgets/util_functions.dart';
@@ -23,7 +23,7 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
   String fileBase64 = "";
   String fileName = "";
 
-  Research? response = null;
+  Research? response;
   bool researchCreated = false;
 
   @override
