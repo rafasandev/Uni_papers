@@ -22,6 +22,7 @@ class _CadastroPageState extends State<CadastroPage> {
   String senha = '';
   String ra = '';
   bool passVisible = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -318,15 +319,19 @@ class _CadastroPageState extends State<CadastroPage> {
                         backgroundColor: yellow,
                         side: const BorderSide(color: Colors.black, width: 2),
                       ),
-                      onPressed: () async {
+                      // onPressed: () async {
+                      //   _formKey.currentState!.validate();
+                      //   if (userSelected == 1) {
+                      //     await createWriter(
+                      //         nome, telefone, email, senha, dropdownValue, ra);
+                      //   } else {
+                      //     await createReader(nome, telefone, email, senha);
+                      //   }
+                      //   Navigator.pop(context);
+                      // },
+                      onPressed: () {
                         _formKey.currentState!.validate();
-                        if (userSelected == 1) {
-                          await createWriter(
-                              nome, telefone, email, senha, dropdownValue, ra);
-                        } else {
-                          await createReader(nome, telefone, email, senha);
-                        }
-                        Navigator.pop(context);
+                        if (userSelected == 1) {}
                       },
                       child: const Text(
                         "Criar Conta",

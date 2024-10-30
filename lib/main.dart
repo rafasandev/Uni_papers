@@ -25,12 +25,14 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         routes: {
-          '/': (context) => LoginPage(),
-          '/cadastro_page': (context) => CadastroPage(),
-          '/main_page': (context) => MainPage(),
-          '/single_article_page': (BuildContext context) => SingleArticlePage(),
-          '/edit_profile': (BuildContext context) => EditProfilePage(),
-          '/create_article': (BuildContext context) => ArticleCreationPage()
+          '/': (context) => const LoginPage(),
+          '/cadastro_page': (context) => const CadastroPage(),
+          '/main_page': (context) => const MainPage(),
+          '/single_article_page': (BuildContext context) =>
+              const SingleArticlePage(),
+          '/edit_profile': (BuildContext context) => const EditProfilePage(),
+          '/create_article': (BuildContext context) =>
+              const ArticleCreationPage()
         },
       ),
     );
