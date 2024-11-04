@@ -5,12 +5,12 @@ import '/models/entities/reader.dart';
 import '/models/entities/research.dart';
 import '/models/entities/writer.dart';
 
-String api_link = 'localhost:8080/api';
+const String apiLink = 'http://localhost:8080/api';
 //https://unipapers-requests-5d1ab2edc5c0.herokuapp.com/api
 
 Future<Reader> fetchReaderWithEmail(String email) async {
   final response =
-      await http.get(Uri.parse('$api_link/readers/email?email=$email'));
+      await http.get(Uri.parse('$apiLink/readers/email?email=$email'));
 
   if (response.statusCode == 200) {
     // Servidor respondeu OK, ou seja, deu bom :)
@@ -29,7 +29,7 @@ Future<Reader> fetchReaderWithEmail(String email) async {
 
 Future<Writer> fetchWriterWithEmail(String email) async {
   final response =
-      await http.get(Uri.parse('$api_link/writers/email?email=$email'));
+      await http.get(Uri.parse('$apiLink/writers/email?email=$email'));
 
   if (response.statusCode == 200) {
     // Servidor respondeu OK, ou seja, deu bom :)
@@ -49,7 +49,7 @@ Future<Writer> fetchWriterWithEmail(String email) async {
 }
 
 Future<List<Research>> fetchAllResearches() async {
-  final response = await http.get(Uri.parse('$api_link/researches'));
+  final response = await http.get(Uri.parse('$apiLink/researches'));
 
   if (response.statusCode == 200) {
     // Servidor retornou as pesquisas
@@ -64,7 +64,7 @@ Future<List<Research>> fetchAllResearches() async {
 
 Future<List<Research>> fetchResearchByName(String name) async {
   final response =
-      await http.get(Uri.parse('$api_link/researches/name?name=$name'));
+      await http.get(Uri.parse('$apiLink/researches/name?name=$name'));
 
   if (response.statusCode == 200) {
     Iterable list = json.decode(response.body);
@@ -79,7 +79,7 @@ Future<List<Research>> fetchResearchByName(String name) async {
 Future<Reader> createReader(
     String nome, String telefone, String email, String senha) async {
   final response = await http.post(
-    Uri.parse('$api_link/readers'),
+    Uri.parse('$apiLink/readers'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
@@ -102,7 +102,7 @@ Future<Reader> createReader(
 Future<Writer> createWriter(String nome, String telefone, String email,
     String senha, String curso, ra) async {
   final response = await http.post(
-    Uri.parse('$api_link/writers'),
+    Uri.parse('$apiLink/writers'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
@@ -143,7 +143,7 @@ Future<Research> createResearch(
   print(jsonEncode(body));
   final response = await http.post(
     Uri.parse(
-      '$api_link/researches',
+      '$apiLink/researches',
     ),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',

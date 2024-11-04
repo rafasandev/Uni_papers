@@ -13,12 +13,6 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
 
-  static const List<Widget> _widgetOptions = <Widget>[
-    HomePage(),
-    SearchPage(),
-    ProfilePage()
-  ];
-
   @override
   Widget build(BuildContext context) {
     final user = ModalRoute.of(context)!.settings.arguments;

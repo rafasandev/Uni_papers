@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:unipapers_project/widgets/signup_writer_widget.dart';
 import '/utils/colors.dart';
 import '/utils/courses_list.dart';
-import '/utils/http_requests/connections.dart';
 import 'package:easy_mask/easy_mask.dart';
 
 class CadastroPage extends StatefulWidget {
@@ -267,9 +267,7 @@ class _CadastroPageState extends State<CadastroPage> {
                             ),
                             onChanged: (value) => ra = value,
                             validator: (value) {
-                              if (value == '' ||
-                                  userSelected == 1 ||
-                                  value == null) {
+                              if (value == '' || value == null) {
                                 return "Este campo deve ser preenchido";
                               }
                               return null;
@@ -331,7 +329,35 @@ class _CadastroPageState extends State<CadastroPage> {
                       // },
                       onPressed: () {
                         _formKey.currentState!.validate();
-                        if (userSelected == 1) {}
+                        setState(() {
+                          if (userSelected == 1) {
+                            // showDialog(
+                            //   context: context,
+                            //   barrierDismissible: false,
+                            //   builder: (BuildContext context) {
+                            //     return const Padding(
+                            //       padding: EdgeInsets.all(150.0),
+                            //       child: Center(
+                            //         child: CircularProgressIndicator(),
+                            //       ),
+                            //     );
+                            //   },
+                            // );
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return SignUpWriterWidget(
+                                    nome: nome,
+                                    email: email,
+                                    senha: senha,
+                                    telefone: telefone,
+                                    dropdownValue: dropdownValue,
+                                    ra: ra,
+                                  );
+                                });
+                            // Navigator.of(context).pop();
+                          }
+                        });
                       },
                       child: const Text(
                         "Criar Conta",
