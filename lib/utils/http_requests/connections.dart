@@ -118,10 +118,10 @@ Future<Writer> createWriter(String nome, String telefone, String email,
     ),
   );
 
-  if (response.statusCode == 201) {
-    return Writer.fromJson(json.decode(response.body) as Map<String, dynamic>);
-  } else if (curso == 'CURSO') {
+  if (curso == 'CURSO') {
     throw Exception('Curso deve ser escolhido');
+  } else if (response.statusCode == 201) {
+    return Writer.fromJson(json.decode(response.body) as Map<String, dynamic>);
   } else {
     throw Exception('Falha ao criar escritor');
   }
