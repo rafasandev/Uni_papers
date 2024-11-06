@@ -1,34 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:unipapers_project/utils/http_requests/connections.dart';
 
-class SignUpWriterWidget extends StatelessWidget {
-  const SignUpWriterWidget({
+class SignUpReaderWidget extends StatelessWidget {
+  const SignUpReaderWidget({
     super.key,
     required this.nome,
     required this.telefone,
     required this.email,
     required this.senha,
-    required this.dropdownValue,
-    required this.ra,
   });
 
   final String nome;
   final String telefone;
   final String email;
   final String senha;
-  final String dropdownValue;
-  final String ra;
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: createWriter(
+        future: createReader(
           nome,
           telefone,
           email,
           senha,
-          dropdownValue,
-          ra,
         ),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {

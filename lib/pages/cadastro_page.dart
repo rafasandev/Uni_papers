@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:unipapers_project/widgets/signup_reader_widget.dart';
 import 'package:unipapers_project/widgets/signup_writer_widget.dart';
 import '/utils/colors.dart';
 import '/utils/courses_list.dart';
@@ -317,32 +318,10 @@ class _CadastroPageState extends State<CadastroPage> {
                         backgroundColor: yellow,
                         side: const BorderSide(color: Colors.black, width: 2),
                       ),
-                      // onPressed: () async {
-                      //   _formKey.currentState!.validate();
-                      //   if (userSelected == 1) {
-                      //     await createWriter(
-                      //         nome, telefone, email, senha, dropdownValue, ra);
-                      //   } else {
-                      //     await createReader(nome, telefone, email, senha);
-                      //   }
-                      //   Navigator.pop(context);
-                      // },
                       onPressed: () {
                         _formKey.currentState!.validate();
                         setState(() {
                           if (userSelected == 1) {
-                            // showDialog(
-                            //   context: context,
-                            //   barrierDismissible: false,
-                            //   builder: (BuildContext context) {
-                            //     return const Padding(
-                            //       padding: EdgeInsets.all(150.0),
-                            //       child: Center(
-                            //         child: CircularProgressIndicator(),
-                            //       ),
-                            //     );
-                            //   },
-                            // );
                             showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
@@ -355,7 +334,17 @@ class _CadastroPageState extends State<CadastroPage> {
                                     ra: ra,
                                   );
                                 });
-                            // Navigator.of(context).pop();
+                          } else {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return SignUpReaderWidget(
+                                    nome: nome,
+                                    email: email,
+                                    senha: senha,
+                                    telefone: telefone,
+                                  );
+                                });
                           }
                         });
                       },

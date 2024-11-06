@@ -100,7 +100,7 @@ Future<Reader> createReader(
 }
 
 Future<Writer> createWriter(String nome, String telefone, String email,
-    String senha, String curso, ra) async {
+    String senha, String curso, String ra) async {
   final response = await http.post(
     Uri.parse('$apiLink/writers'),
     headers: <String, String>{
@@ -120,6 +120,8 @@ Future<Writer> createWriter(String nome, String telefone, String email,
 
   if (response.statusCode == 201) {
     return Writer.fromJson(json.decode(response.body) as Map<String, dynamic>);
+  } else if (curso == 'CURSO') {
+    throw Exception('Curso deve ser escolhido');
   } else {
     throw Exception('Falha ao criar escritor');
   }
