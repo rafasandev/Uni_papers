@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '/pages/article_creation_page.dart';
 import '/pages/cadastro_page.dart';
 import '/pages/edit_profile_page.dart';
@@ -8,7 +9,9 @@ import '/pages/single_article_page.dart';
 import '/utils/colors.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((value) => runApp(const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
