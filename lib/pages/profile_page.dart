@@ -15,6 +15,8 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
+    // TODO: Fazer um botão de logout do usuário
+    // todo: Melhora essa bosta de tela
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -25,12 +27,10 @@ class _ProfilePageState extends State<ProfilePage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
-                child: const Text(
-                  "Perfil",
-                  style: TextStyle(
-                    fontSize: 32,
-                  ),
+              const Text(
+                "Perfil",
+                style: TextStyle(
+                  fontSize: 32,
                 ),
               ),
               Container(
@@ -142,7 +142,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Container(
                         margin: const EdgeInsets.fromLTRB(0, 15, 0, 10),
                         child: const Text(
-                            "O projeto UniPapers foi idealizado por alunos do curso de Engenharia da Computação da Universidade de Sorocaba (UNISO) com o propósito de integrar os sistemas de gerenciamento acadêmico da instituição. Criado por Luiz Gustavo, Pedro Lucas da Silva e Rafael Santos, o projeto visa facilitar o acesso e a distribuição de artigos acadêmicos produzidos pelos estudantes da universidade, promovendo a disseminação de conhecimento e incentivando a pesquisa e a colaboração acadêmica."),
+                            "O projeto UniPapers foi idealizado por alunos do curso de Engenharia da Computação da Universidade de Sorocaba (UNISO) com o propósito de integrar os sistemas de gerenciamento acadêmico da instituição. Criado por Luiz Gustavo Santos e Rafael Santos, o projeto visa facilitar o acesso e a distribuição de artigos acadêmicos produzidos pelos estudantes da universidade, promovendo a disseminação de conhecimento e incentivando a pesquisa e a colaboração acadêmica."),
                       ),
                       Container(
                         margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),

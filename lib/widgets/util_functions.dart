@@ -24,49 +24,15 @@ Future<void> alertError(String text, BuildContext context) async {
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: const Text('Ok'),
+            child: const Text(
+              'Ok',
+              style: TextStyle(color: Colors.black),
+            ),
           ),
         ],
       );
     },
   );
-}
-
-void loginReader(String email, String password, BuildContext context) {
-  late Reader user;
-  fetchReaderWithEmail(email).then((reader) {
-    user = reader;
-    if (reader.password == password) {
-      Navigator.pushNamed(
-        context,
-        '/main_page',
-        arguments: user,
-      );
-    } else if (reader.name == 'ERRO' && reader.password == 'ERRO') {
-      alertError('Leitor não encontrado', context);
-    } else {
-      alertError('Email ou senha inválidos', context);
-    }
-  });
-}
-
-void loginWriter(String email, String senha, BuildContext context) {
-  late Writer user;
-  fetchWriterWithEmail(email).then((writer) {
-    user = writer;
-    if (writer.password == senha) {
-      Navigator.pushNamed(
-        context,
-        '/main_page',
-        arguments: user,
-        //TODO: Trocar isso por um Provider
-      );
-    } else if (writer.name == 'ERRO' && writer.password == 'ERRO') {
-      alertError('Escritor não encontrado', context);
-    } else {
-      alertError('Email ou senha inválidos', context);
-    }
-  });
 }
 
 Future<String> convertPDFUpload() async {

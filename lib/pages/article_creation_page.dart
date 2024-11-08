@@ -31,33 +31,37 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
     int writerId = ModalRoute.of(context)!.settings.arguments as int;
     return Scaffold(
       backgroundColor: background,
-      appBar: AppBar(
-        backgroundColor: background,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(80),
+        child: AppBar(
+          backgroundColor: yellow,
+          flexibleSpace: const Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: EdgeInsets.only(bottom: 10),
+              child: Text(
+                'Upload de Artigo',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          centerTitle: true,
+        ),
       ),
       body: SingleChildScrollView(
         child: !researchCreated
             ? Column(
                 children: [
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                    decoration: const BoxDecoration(color: yellow),
-                    margin: const EdgeInsets.only(bottom: 10),
-                    child: const Text(
-                      "Upload de Artigo",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
                   Form(
                     key: _formKey,
                     child: Column(
                       children: [
                         Container(
-                          margin: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                          margin: const EdgeInsets.fromLTRB(20, 25, 20, 15),
                           child: TextFormField(
                             decoration: InputDecoration(
                               label: const Text("Título do artigo*"),
@@ -77,39 +81,37 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                             },
                           ),
                         ),
-                        Container(
-                          child: Column(
-                            children: [
-                              for (var i = 0; i < countAuthors; i++)
-                                Container(
-                                  margin:
-                                      const EdgeInsets.fromLTRB(20, 15, 20, 0),
-                                  child: TextFormField(
-                                    decoration: InputDecoration(
-                                      label: const Text("Autor*"),
-                                      filled: true,
-                                      fillColor: white,
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                    ),
-                                    validator: (value) => value == ""
-                                        ? "Este campo deve ser preenchido"
-                                        : null,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        author[i.toString()] = value;
-                                      });
-                                    },
+                        Column(
+                          children: [
+                            for (var i = 0; i < countAuthors; i++)
+                              Container(
+                                margin:
+                                    const EdgeInsets.fromLTRB(20, 15, 20, 0),
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    label: const Text("Autor*"),
+                                    filled: true,
+                                    fillColor: white,
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
                                   ),
-                                )
-                            ],
-                          ),
+                                  validator: (value) => value == ""
+                                      ? "Este campo deve ser preenchido"
+                                      : null,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      author[i.toString()] = value;
+                                    });
+                                  },
+                                ),
+                              )
+                          ],
                         ),
                         Row(
                           children: [
                             Container(
-                              padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                              padding: const EdgeInsets.fromLTRB(20, 10, 0, 10),
                               alignment: Alignment.centerLeft,
                               child: ElevatedButton(
                                 onPressed: () {
@@ -118,13 +120,18 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                                   });
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: background,
-                                  elevation: 0.0,
+                                  // backgroundColor: background,
+                                  // elevation: 0.0,
+                                  backgroundColor: blue,
+                                  side: const BorderSide(
+                                    width: 1.5,
+                                    color: Colors.black,
+                                  ),
                                 ),
                                 child: const Text(
                                   "Adicionar autor +",
                                   style: TextStyle(
-                                    color: Colors.black,
+                                    color: Colors.white,
                                     fontSize: 16,
                                   ),
                                 ),

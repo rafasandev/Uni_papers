@@ -46,7 +46,10 @@ class SignUpWriterWidget extends StatelessWidget {
               actions: [
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(),
-                  child: const Text('Ok'),
+                  child: const Text(
+                    'Ok',
+                    style: TextStyle(color: Colors.black),
+                  ),
                 ),
               ],
             );
@@ -59,7 +62,10 @@ class SignUpWriterWidget extends StatelessWidget {
                   onPressed: () => Navigator.of(context).popUntil((route) {
                     return route.settings.name == '/';
                   }),
-                  child: const Text('Ok'),
+                  child: const Text(
+                    'Ok',
+                    style: TextStyle(color: Colors.black),
+                  ),
                 ),
               ],
             );

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:unipapers_project/widgets/login_reader_widget.dart';
+import 'package:unipapers_project/widgets/login_writer_widget.dart';
 import '../widgets/util_functions.dart';
 import '/utils/colors.dart';
 
@@ -73,14 +75,14 @@ class _LoginPageState extends State<LoginPage> {
                     decoration: InputDecoration(
                       suffixIcon: (passwordVisible)
                           ? IconButton(
-                              icon: Icon(Icons.remove_red_eye_outlined),
+                              icon: const Icon(Icons.remove_red_eye_outlined),
                               onPressed: () {
                                 setState(() {
                                   passwordVisible = !passwordVisible;
                                 });
                               })
                           : IconButton(
-                              icon: Icon(Icons.visibility_off_outlined),
+                              icon: const Icon(Icons.visibility_off_outlined),
                               onPressed: () {
                                 setState(() {
                                   passwordVisible = !passwordVisible;
@@ -101,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                       if (!value!.contains(RegExp(r'[0-9]'))) {
                         return "Sua senha deve conter letras e números";
                       }
-                      if (value.length < 6) {
+                      if (value.length < 8) {
                         return "Sua senha deve ter pelo menos 8 caracteres";
                       }
                       return null;
@@ -138,13 +140,31 @@ class _LoginPageState extends State<LoginPage> {
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              if (isWriter) {
-                                loginWriter(email, password, context);
-                              } else {
-                                loginReader(email, password, context);
+                            setState(() {
+                              if (_formKey.currentState!.validate()) {
+                                if (isWriter) {
+                                  showDialog(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (BuildContext context) {
+                                        return LoginWriterWidget(
+                                          email: email,
+                                          password: password,
+                                        );
+                                      });
+                                } else {
+                                  showDialog(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (BuildContext context) {
+                                        return LoginReaderWidget(
+                                          email: email,
+                                          password: password,
+                                        );
+                                      });
+                                }
                               }
-                            }
+                            });
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: blue,
@@ -170,38 +190,36 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(
                     height: 15,
                   ),
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        const Text(
-                          'Não possui uma conta?',
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      const Text(
+                        'Não possui uma conta?',
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.black,
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, "/cadastro_page");
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: yellow,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: const Text(
+                          'Criar conta',
                           style: TextStyle(
                             fontSize: 15,
+                            fontWeight: FontWeight.bold,
                             color: Colors.black,
                           ),
                         ),
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, "/cadastro_page");
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: yellow,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                          child: const Text(
-                            'Criar conta',
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
+                      )
+                    ],
                   ),
                 ],
               ),

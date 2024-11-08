@@ -32,7 +32,6 @@ class SignUpReaderWidget extends StatelessWidget {
                 child: CircularProgressIndicator(),
               ),
             );
-            // return const SizedBox();
           } else if (snapshot.hasError) {
             return AlertDialog(
               title: const Text('Erro ao cadastrar usuário'),
@@ -40,7 +39,10 @@ class SignUpReaderWidget extends StatelessWidget {
               actions: [
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(),
-                  child: const Text('Ok'),
+                  child: const Text(
+                    'Ok',
+                    style: TextStyle(color: Colors.black),
+                  ),
                 ),
               ],
             );
@@ -53,7 +55,10 @@ class SignUpReaderWidget extends StatelessWidget {
                   onPressed: () => Navigator.of(context).popUntil((route) {
                     return route.settings.name == '/';
                   }),
-                  child: const Text('Ok'),
+                  child: const Text(
+                    'Ok',
+                    style: TextStyle(color: Colors.black),
+                  ),
                 ),
               ],
             );
