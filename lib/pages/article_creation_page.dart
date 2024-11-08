@@ -86,7 +86,7 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                             for (var i = 0; i < countAuthors; i++)
                               Container(
                                 margin:
-                                    const EdgeInsets.fromLTRB(20, 15, 20, 0),
+                                    const EdgeInsets.fromLTRB(20, 15, 20, 10),
                                 child: TextFormField(
                                   decoration: InputDecoration(
                                     label: const Text("Autor*"),
@@ -133,32 +133,41 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 16,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ),
                             ),
                             if (countAuthors > 1)
                               Container(
-                                padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                                alignment: Alignment.centerLeft,
+                                padding:
+                                    const EdgeInsets.fromLTRB(0, 10, 20, 10),
+                                alignment: Alignment.centerRight,
+                                // TODO: ARRUMAR ESSA BOSTA DE BOTÃO
                                 child: ElevatedButton(
                                   onPressed: () {
                                     setState(() {
                                       countAuthors--;
 
                                       author.remove(countAuthors.toString());
-                                      print(author);
                                     });
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: background,
-                                    elevation: 0.0,
+                                    // backgroundColor: background,
+                                    // elevation: 0.0,
+                                    backgroundColor:
+                                        const Color.fromARGB(255, 202, 59, 49),
+                                    side: const BorderSide(
+                                      width: 1.5,
+                                      color: Colors.black,
+                                    ),
                                   ),
                                   child: const Text(
                                     "Remover autor -",
                                     style: TextStyle(
-                                      color: Colors.black,
+                                      color: Colors.white,
                                       fontSize: 16,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                 ),
@@ -274,10 +283,10 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Container(
-                                  padding: EdgeInsets.symmetric(
+                                  padding: const EdgeInsets.symmetric(
                                     vertical: 5,
                                   ),
-                                  child: Text(
+                                  child: const Text(
                                     "Confirmar",
                                     style: TextStyle(
                                       fontSize: 30,
@@ -285,7 +294,7 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                                     ),
                                   ),
                                 ),
-                                Icon(
+                                const Icon(
                                   Icons.check,
                                   color: background,
                                 ),
@@ -298,7 +307,7 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                   ),
                 ],
               )
-            : Center(
+            : const Center(
                 child: Text(
                   "Artigo Criado com sucesso",
                   style: TextStyle(
