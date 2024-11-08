@@ -42,7 +42,7 @@ class SignUpWriterWidget extends StatelessWidget {
           } else if (snapshot.hasError) {
             return AlertDialog(
               title: const Text('Erro ao cadastrar usuário'),
-              content: Text('An error occurred: ${snapshot.error}'),
+              content: Text('${snapshot.error}'),
               actions: [
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(),
