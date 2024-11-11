@@ -14,13 +14,15 @@ class SearchWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.of(context).size.height;
+
     return FutureBuilder(
       future: fetchResearchByName(search),
       builder: ((context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Padding(
-            padding: EdgeInsets.all(150.0),
-            child: Center(
+          return Padding(
+            padding: EdgeInsets.all(screenHeight * 0.05),
+            child: const Center(
               child: CircularProgressIndicator(),
             ),
           );

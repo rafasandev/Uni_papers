@@ -14,33 +14,35 @@ class _EditProfilePageState extends State<EditProfilePage> {
         appBar: AppBar(
           title: const Text("Edição de perfil"),
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(
-                Icons.build_circle_outlined,
-                size: 180,
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(
-                  vertical: 20,
+        body: SafeArea(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(
+                  Icons.build_circle_outlined,
+                  size: 180,
                 ),
-                child: const Text(
-                  "Página em Construção",
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
+                Container(
+                  margin: const EdgeInsets.symmetric(
+                    vertical: 20,
+                  ),
+                  child: const Text(
+                    "Página em Construção",
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-              ),
-              const Text(
-                "Por favor retorne ao menu",
-                style: TextStyle(
-                  fontSize: 25,
+                const Text(
+                  "Por favor retorne ao menu",
+                  style: TextStyle(
+                    fontSize: 25,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ));
   }
