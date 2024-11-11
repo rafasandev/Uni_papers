@@ -19,10 +19,10 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       body: Center(child: Builder(builder: (context) {
         if (_currentIndex == 0) {
-          return HomePage();
+          return const HomePage();
         }
         if (_currentIndex == 1) {
-          return SearchPage();
+          return const SearchPage();
         }
         if (_currentIndex == 2) {
           return ProfilePage(

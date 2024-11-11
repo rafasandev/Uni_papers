@@ -244,8 +244,8 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                         ),
                         Container(
                           alignment: Alignment.center,
-                          padding: EdgeInsets.symmetric(horizontal: 20),
-                          margin: EdgeInsets.fromLTRB(0, 0, 0, 30),
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          margin: const EdgeInsets.fromLTRB(0, 0, 0, 30),
                           child: ElevatedButton(
                             onPressed: () async {
                               _formKey.currentState!.validate();
@@ -268,7 +268,7 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                                 if (response != null) {
                                   researchCreated = true;
                                   Timer(
-                                      Duration(seconds: 4),
+                                      const Duration(seconds: 4),
                                       () => Navigator.pushNamed(
                                           context, "/main_page"));
                                 }

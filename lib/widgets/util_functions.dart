@@ -7,10 +7,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
-import '../models/entities/reader.dart';
-import '../models/entities/writer.dart';
-import '../utils/http_requests/connections.dart';
-
 import 'package:document_file_save_plus/document_file_save_plus.dart';
 
 Future<void> alertError(String text, BuildContext context) async {

@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
                 return Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.fromLTRB(80, 20, 80, 20),
+                      padding: const EdgeInsets.fromLTRB(80, 20, 80, 20),
                       child: Image.asset("lib/images/onlyHandsLogo.png"),
                     ),
                     Expanded(

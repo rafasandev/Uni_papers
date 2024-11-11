@@ -1,4 +1,4 @@
-List<String> courses_list = <String>[
+List<String> coursesList = <String>[
   "CURSO",
   "Administração",
   "Análise e Desenvolvimento de Sistemas",

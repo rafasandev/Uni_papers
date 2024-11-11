@@ -24,15 +24,15 @@ class _SearchPageState extends State<SearchPage> {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.fromLTRB(60, 0, 60, 00),
+                    padding: const EdgeInsets.fromLTRB(60, 0, 60, 00),
                     child: Image.asset("lib/images/onlyHandsLogo.png"),
                   ),
                   Container(
-                    margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                    margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                     child: TextField(
                       decoration: InputDecoration(
                           label: const Text("Pesquise por um artigo"),

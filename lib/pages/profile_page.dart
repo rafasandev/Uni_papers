@@ -5,7 +5,7 @@ import '/models/entities/writer.dart';
 import '/utils/colors.dart';
 
 class ProfilePage extends StatefulWidget {
-  final user;
+  final dynamic user;
   const ProfilePage({super.key, this.user});
 
   @override
@@ -16,7 +16,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     // TODO: Fazer um botão de logout do usuário
-    // todo: Melhora essa bosta de tela
+    // TODO: Melhora essa bosta de tela
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(

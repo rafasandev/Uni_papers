@@ -15,7 +15,7 @@ class CadastroPage extends StatefulWidget {
 
 class _CadastroPageState extends State<CadastroPage> {
   final _formKey = GlobalKey<FormState>();
-  String dropdownValue = courses_list.first;
+  String dropdownValue = coursesList.first;
   int userSelected = 0;
   String nome = '';
   String telefone = '';
@@ -288,7 +288,7 @@ class _CadastroPageState extends State<CadastroPage> {
                               value: dropdownValue,
                               hint: const Text("CURSO"),
                               dropdownColor: white,
-                              items: courses_list.map<DropdownMenuItem<String>>(
+                              items: coursesList.map<DropdownMenuItem<String>>(
                                   (String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,

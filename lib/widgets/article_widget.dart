@@ -28,7 +28,7 @@ class _ArticleWidgetState extends State<ArticleWidget> {
       padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
       child: Column(
         children: [
-          Container(
+          SizedBox(
             width: double.infinity,
             child: Text(
               utf8.decode(widget.article.title.codeUnits),
@@ -60,7 +60,7 @@ class _ArticleWidgetState extends State<ArticleWidget> {
             padding: const EdgeInsets.fromLTRB(0, 10, 0, 15),
             child: Column(
               children: [
-                Container(
+                SizedBox(
                   width: double.infinity,
                   child: Text(
                     maxLines: 3,
