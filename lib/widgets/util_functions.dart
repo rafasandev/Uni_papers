@@ -80,36 +80,3 @@ Future<void> saveBLOBAsPDF(String? base64Str, String fileName) async {
     print(e);
   }
 }
-
-// List<Research> getResearches() {
-//   late List<Research> researches;
-//   try {
-//     fetchAllResearches().then((value) {
-//       Iterable list = json.decode(value);
-//       researches = List<Research>.from(list.map((e) => Research.fromJson(e)));
-//       if (researches != null) {
-//         return researches;
-//       } else {
-//         throw Exception('List returned null');
-//       }
-//     });
-//   } catch (e) {
-//     print(e);
-//   }
-// }
-
-// List<Research> getResearches() {
-//   List<Research> list = [];
-//   try {
-//     fetchAllResearches().then((research) {
-//       list.addAll(research);
-//       return list;
-//     }).catchError((error) {
-//       print(error);
-//       return [];
-//     });
-//   } catch (e) {
-//     print(e);
-//     return [];
-//   }
-// }

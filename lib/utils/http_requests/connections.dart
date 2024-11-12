@@ -5,9 +5,9 @@ import '/models/entities/reader.dart';
 import '/models/entities/research.dart';
 import '/models/entities/writer.dart';
 
-const String apiLink = 'http://192.168.0.75:8080/api';
-// const String apiLink = 'http://localhost:8080/api';
-//https://unipapers-requests-5d1ab2edc5c0.herokuapp.com/api
+/* Links Luiz - PC Trabalho, pessoal e geral */
+const String apiLink = 'http://pc-luiz:8080/api'; // Trabalho
+// const String apiLink = 'http://localhost:8080/api'; // Local
 
 Future<Reader> fetchReaderWithEmail(String email) async {
   final response =

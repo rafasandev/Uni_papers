@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:unipapers_project/models/entities/writer.dart';
 import '/models/entities/research.dart';
 import '/utils/colors.dart';
 import '/utils/http_requests/connections.dart';
@@ -28,6 +29,7 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
 
   @override
   Widget build(BuildContext context) {
+    Writer writer = ModalRoute.of(context)!.settings.arguments as Writer;
     int writerId = ModalRoute.of(context)!.settings.arguments as int;
     return Scaffold(
       backgroundColor: background,
@@ -275,7 +277,10 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                                     Timer(
                                         const Duration(seconds: 4),
                                         () => Navigator.pushNamed(
-                                            context, "/main_page"));
+                                              context,
+                                              "/main_page",
+                                              arguments: writer,
+                                            ));
                                   }
                                 });
                               },
