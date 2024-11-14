@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:unipapers_project/models/entities/writer.dart';
 import '/models/entities/research.dart';
 import '/utils/colors.dart';
@@ -23,7 +24,7 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
   String description = '';
   String fileBase64 = "";
   String fileName = "";
-
+  Uint8List? file;
   Research? response;
   bool researchCreated = false;
 
@@ -234,6 +235,9 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                                 convertPDFUpload().then((value) {
                                   valuesFile =
                                       value.split(" v4ta4watv4et5v435te435 ");
+
+                                  newConvertPDFUpload()
+                                      .then((value) => file = value);
                                   setState(() {
                                     fileName = valuesFile[0];
                                     fileBase64 = valuesFile[1];
@@ -273,7 +277,7 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                                     title: title,
                                     collab: collaborators,
                                     description: description,
-                                    fileBase64: fileBase64,
+                                    fileBase64: file,
                                     writer: writer,
                                   );
                                 }

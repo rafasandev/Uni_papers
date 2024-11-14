@@ -1,10 +1,12 @@
+import 'package:flutter/services.dart';
+
 import '/models/entities/writer.dart';
 
 class Research {
   int _id;
   String _title;
   String _description;
-  String? _blobFile;
+  Uint8List? _blobFile;
   Writer _author;
   String? _collaborators = '';
 
@@ -12,7 +14,7 @@ class Research {
     required int id,
     required String title,
     required String description,
-    required String? blobFile,
+    required Uint8List? blobFile,
     required Writer author,
     required String? collaborators,
   })  : _author = author,
@@ -29,7 +31,7 @@ class Research {
         "id": int id,
         "name": String title,
         "description": String description,
-        "blobFile": String? blobFile,
+        "blobFile": Uint8List? blobFile,
         "writer": {
           // Writer author,
           "id": int idWriter,
@@ -80,9 +82,9 @@ class Research {
     _description = value;
   }
 
-  String? get blobFile => _blobFile;
+  Uint8List? get blobFile => _blobFile;
 
-  set blobFile(String? value) {
+  set blobFile(Uint8List? value) {
     _blobFile = value;
   }
 

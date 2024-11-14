@@ -33,7 +33,10 @@ Future<void> alertError(String text, BuildContext context) async {
 
 Future<String> convertPDFUpload() async {
   FilePickerResult? result = await FilePicker.platform.pickFiles(
-      withData: true, allowedExtensions: ["pdf"], type: FileType.custom);
+    withData: true,
+    allowedExtensions: ["pdf"],
+    type: FileType.custom,
+  );
 
   FilePickerStatus.done;
   if (result != null) {
@@ -55,11 +58,27 @@ Future<String> convertPDFUpload() async {
   }
 }
 
+Future<Uint8List?> newConvertPDFUpload() async {
+  FilePickerResult? result = await FilePicker.platform.pickFiles(
+    withData: true,
+    allowedExtensions: ["pdf"],
+    type: FileType.custom,
+  );
+
+  FilePickerStatus.done;
+  if (result != null) {
+    final bytes = await result.files.single.bytes;
+    return bytes;
+  } else {
+    return null;
+  }
+}
+
 Future<Uint8List> decodeBase64ToList(String base64Str) async {
   return await Future.microtask(() => (base64Decode(base64Str)));
 }
 
-Future<void> saveBLOBAsPDF(String? base64Str, String fileName) async {
+Future<void> saveBLOBAsPDF(Uint8List? base64Str, String fileName) async {
   try {
     if (!kIsWeb) {
       final directory = await getTemporaryDirectory();
@@ -67,7 +86,7 @@ Future<void> saveBLOBAsPDF(String? base64Str, String fileName) async {
       final file = File("${directory.path}/$newFileName.pdf");
 
       print(base64Str);
-      Uint8List data = await decodeBase64ToList(base64Str!);
+      Uint8List data = base64Str!;
       print(data);
 
       file.writeAsBytesSync(data);

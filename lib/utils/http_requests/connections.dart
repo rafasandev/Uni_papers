@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import '/models/entities/reader.dart';
 import '/models/entities/research.dart';
@@ -176,7 +177,7 @@ Future<Research> newCreateResearch({
   required String title,
   required String collab,
   required String description,
-  required String fileBase64,
+  required Uint8List? fileBase64,
   required Writer writer,
 }) async {
   final response = await http.post(
@@ -197,7 +198,6 @@ Future<Research> newCreateResearch({
     ),
   );
   if (response.statusCode == 201) {
-    // return Writer.fromJson(json.decode(response.body) as Map<String, dynamic>);
     return Research.fromJson(
         json.decode(response.body) as Map<String, dynamic>);
   } else {
