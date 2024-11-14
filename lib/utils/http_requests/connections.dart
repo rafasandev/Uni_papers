@@ -78,7 +78,11 @@ Future<List<Research>> fetchResearchByName(String name) async {
 }
 
 Future<Reader> createReader(
-    String nome, String telefone, String email, String senha) async {
+  String nome,
+  String telefone,
+  String email,
+  String senha,
+) async {
   final response = await http.post(
     Uri.parse('$apiLink/readers'),
     headers: <String, String>{
@@ -100,8 +104,14 @@ Future<Reader> createReader(
   }
 }
 
-Future<Writer> createWriter(String nome, String telefone, String email,
-    String senha, String curso, String ra) async {
+Future<Writer> createWriter(
+  String nome,
+  String telefone,
+  String email,
+  String senha,
+  String curso,
+  String ra,
+) async {
   final response = await http.post(
     Uri.parse('$apiLink/writers'),
     headers: <String, String>{
@@ -159,5 +169,38 @@ Future<Research> createResearch(
   } else {
     print(response.body);
     throw Exception("Falha ao criar artigo");
+  }
+}
+
+Future<Research> newCreateResearch({
+  required String title,
+  required String collab,
+  required String description,
+  required String fileBase64,
+  required Writer writer,
+}) async {
+  final response = await http.post(
+    Uri.parse(
+      '$apiLink/researches',
+    ),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(
+      <String, dynamic>{
+        "name": title,
+        "description": description,
+        "collaborators": collab,
+        "writer": {"id": writer.id.toString()},
+        "blobFile": fileBase64,
+      },
+    ),
+  );
+  if (response.statusCode == 201) {
+    // return Writer.fromJson(json.decode(response.body) as Map<String, dynamic>);
+    return Research.fromJson(
+        json.decode(response.body) as Map<String, dynamic>);
+  } else {
+    throw new Exception('Erro ao criar escritor');
   }
 }

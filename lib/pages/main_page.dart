@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:unipapers_project/utils/colors.dart';
 import '/pages/home_page.dart';
 import '/pages/profile_page.dart';
 import '/pages/search_page.dart';
@@ -41,14 +42,17 @@ class _MainPageState extends State<MainPage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: "Home",
+            backgroundColor: blue,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
             label: "Pesquisa",
+            backgroundColor: blue,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
             label: "Perfil",
+            backgroundColor: blue,
           ),
         ],
         currentIndex: _currentIndex,

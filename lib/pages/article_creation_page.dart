@@ -30,7 +30,6 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
   @override
   Widget build(BuildContext context) {
     Writer writer = ModalRoute.of(context)!.settings.arguments as Writer;
-    int writerId = ModalRoute.of(context)!.settings.arguments as int;
     return Scaffold(
       backgroundColor: background,
       appBar: PreferredSize(
@@ -263,12 +262,19 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                                 if (fileBase64 != "" &&
                                     fileName != "" &&
                                     collaborators != "") {
-                                  response = await createResearch(
-                                    title,
-                                    collaborators,
-                                    description,
-                                    fileBase64,
-                                    writerId.toString(),
+                                  // response = await createResearch(
+                                  //   title,
+                                  //   collaborators,
+                                  //   description,
+                                  //   fileBase64,
+                                  //   writerId.toString(),
+                                  // );
+                                  response = await newCreateResearch(
+                                    title: title,
+                                    collab: collaborators,
+                                    description: description,
+                                    fileBase64: fileBase64,
+                                    writer: writer,
                                   );
                                 }
                                 setState(() {

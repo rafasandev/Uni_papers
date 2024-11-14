@@ -46,7 +46,12 @@ class _ProfilePageState extends State<ProfilePage> {
                       const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Olá"),
+                          Text(
+                            "Olá",
+                            style: TextStyle(
+                              fontSize: 22,
+                            ),
+                          ),
                           SizedBox(
                             width: 10,
                           ),
@@ -103,8 +108,11 @@ class _ProfilePageState extends State<ProfilePage> {
                           backgroundColor: background,
                         ),
                         onPressed: () {
-                          Navigator.pushNamed(context, "/create_article",
-                              arguments: widget.user.id);
+                          Navigator.pushNamed(
+                            context,
+                            "/create_article",
+                            arguments: widget.user,
+                          );
                         },
                         child: const Padding(
                           padding: EdgeInsets.all(8.0),

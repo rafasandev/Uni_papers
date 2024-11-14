@@ -30,9 +30,8 @@ class Research {
         "name": String title,
         "description": String description,
         "blobFile": String? blobFile,
-        "writer":
-            // Writer author,
-            {
+        "writer": {
+          // Writer author,
           "id": int idWriter,
           "name": String nameWriter,
           "phone": String phoneWriter,
