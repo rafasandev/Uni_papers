@@ -7,8 +7,10 @@ import '/models/entities/research.dart';
 import '/models/entities/writer.dart';
 
 /* Links Luiz - PC Trabalho, pessoal e geral */
-const String apiLink = 'http://pc-luiz:8080/api'; // Trabalho
+// const String apiLink = 'http://pc-luiz:8080/api'; // Trabalho
+// const String apiLink = 'http://luizpc:8080/api'; //Note
 // const String apiLink = 'http://localhost:8080/api'; // Local
+const String apiLink = 'http://192.168.0.110:8080/api';
 
 Future<Reader> fetchReaderWithEmail(String email) async {
   final response =
@@ -139,45 +141,11 @@ Future<Writer> createWriter(
   }
 }
 
-Future<Research> createResearch(
-  final String title,
-  final String authorName,
-  final String description,
-  final String fileBase64,
-  final String authorId,
-) async {
-  print(fileBase64);
-  Map<String, dynamic> body = {
-    "name": title,
-    "description": description,
-    "blobFile": fileBase64,
-    "writer": {"id": authorId},
-    "collaborators": authorName,
-  };
-  print(jsonEncode(body));
-  final response = await http.post(
-    Uri.parse(
-      '$apiLink/researches',
-    ),
-    headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-    },
-    body: jsonEncode(body),
-  );
-  if (response.statusCode == 201) {
-    print("Artigo criado com sucesso");
-    return Research.fromJson(json.decode(response.body));
-  } else {
-    print(response.body);
-    throw Exception("Falha ao criar artigo");
-  }
-}
-
-Future<Research> newCreateResearch({
+Future<Research> createResearch({
   required String title,
   required String collab,
   required String description,
-  required Uint8List? fileBase64,
+  required Uint8List? blobFile,
   required Writer writer,
 }) async {
   final response = await http.post(
@@ -193,7 +161,7 @@ Future<Research> newCreateResearch({
         "description": description,
         "collaborators": collab,
         "writer": {"id": writer.id.toString()},
-        "blobFile": fileBase64,
+        "blobFile": base64.encode(blobFile!),
       },
     ),
   );
@@ -201,6 +169,6 @@ Future<Research> newCreateResearch({
     return Research.fromJson(
         json.decode(response.body) as Map<String, dynamic>);
   } else {
-    throw new Exception('Erro ao criar escritor');
+    throw Exception('Erro ao criar pesquisa');
   }
 }

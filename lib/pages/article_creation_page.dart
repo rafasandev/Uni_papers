@@ -1,11 +1,9 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:unipapers_project/models/entities/writer.dart';
+import 'package:unipapers_project/widgets/create_research_widget.dart';
 import '/models/entities/research.dart';
 import '/utils/colors.dart';
-import '/utils/http_requests/connections.dart';
 import '/widgets/util_functions.dart';
 
 class ArticleCreationPage extends StatefulWidget {
@@ -22,7 +20,6 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
   String title = '';
   Map<String, String> author = {};
   String description = '';
-  String fileBase64 = "";
   String fileName = "";
   Uint8List? file;
   Research? response;
@@ -230,18 +227,11 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                           Container(
                             padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
                             child: ElevatedButton(
-                              onPressed: () {
-                                List<String> valuesFile;
-                                convertPDFUpload().then((value) {
-                                  valuesFile =
-                                      value.split(" v4ta4watv4et5v435te435 ");
-
-                                  newConvertPDFUpload()
-                                      .then((value) => file = value);
-                                  setState(() {
-                                    fileName = valuesFile[0];
-                                    fileBase64 = valuesFile[1];
-                                  });
+                              onPressed: () async {
+                                final results = await convertPDFUpload();
+                                setState(() {
+                                  fileName = results["fileName"];
+                                  file = results["file"];
                                 });
                               },
                               style: TextButton.styleFrom(
@@ -263,35 +253,18 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                                 for (var authorName in author.values) {
                                   collaborators += "$authorName---";
                                 }
-                                if (fileBase64 != "" &&
-                                    fileName != "" &&
-                                    collaborators != "") {
-                                  // response = await createResearch(
-                                  //   title,
-                                  //   collaborators,
-                                  //   description,
-                                  //   fileBase64,
-                                  //   writerId.toString(),
-                                  // );
-                                  response = await newCreateResearch(
-                                    title: title,
-                                    collab: collaborators,
-                                    description: description,
-                                    fileBase64: file,
-                                    writer: writer,
-                                  );
-                                }
                                 setState(() {
-                                  if (response != null) {
-                                    researchCreated = true;
-                                    Timer(
-                                        const Duration(seconds: 4),
-                                        () => Navigator.pushNamed(
-                                              context,
-                                              "/main_page",
-                                              arguments: writer,
-                                            ));
-                                  }
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return CreateResearchWidget(
+                                          title: title,
+                                          collaborators: collaborators,
+                                          description: description,
+                                          blobFile: file,
+                                          writer: writer,
+                                        );
+                                      });
                                 });
                               },
                               style: ElevatedButton.styleFrom(

@@ -31,7 +31,23 @@ Future<void> alertError(String text, BuildContext context) async {
   );
 }
 
-Future<String> convertPDFUpload() async {
+// Future<String> convertPDFUpload() async {
+//   FilePickerResult? result = await FilePicker.platform.pickFiles(
+//     withData: true,
+//     allowedExtensions: ["pdf"],
+//     type: FileType.custom,
+//   );
+
+//   FilePickerStatus.done;
+//   if (result != null) {
+//     String fileName = result.files.first.name;
+//     return fileName;
+//   } else {
+//     return "Erro";
+//   }
+// }
+
+Future<Map<String, dynamic>> convertPDFUpload() async {
   FilePickerResult? result = await FilePicker.platform.pickFiles(
     withData: true,
     allowedExtensions: ["pdf"],
@@ -40,62 +56,60 @@ Future<String> convertPDFUpload() async {
 
   FilePickerStatus.done;
   if (result != null) {
-    PlatformFile file = result.files.first;
-    Uint8List bytesList = file.bytes!;
-
-    String base64Str = base64Encode(bytesList);
-
-    print("String de base 64: $base64Str");
-
-    String fileName = file.name;
-    // String decode = bytesList.map((e) => e.toString()).join(",");
-
-    String fileStr = "$fileName v4ta4watv4et5v435te435 $base64Str";
-
-    return fileStr;
+    return {
+      "fileName": result.files.single.name,
+      "file": result.files.single.bytes
+    };
   } else {
-    return "Erro";
+    return {"fileName": null, "file": null};
   }
 }
 
-Future<Uint8List?> newConvertPDFUpload() async {
-  FilePickerResult? result = await FilePicker.platform.pickFiles(
-    withData: true,
-    allowedExtensions: ["pdf"],
-    type: FileType.custom,
-  );
-
-  FilePickerStatus.done;
-  if (result != null) {
-    final bytes = await result.files.single.bytes;
-    return bytes;
-  } else {
-    return null;
-  }
-}
-
-Future<Uint8List> decodeBase64ToList(String base64Str) async {
-  return await Future.microtask(() => (base64Decode(base64Str)));
-}
-
-Future<void> saveBLOBAsPDF(Uint8List? base64Str, String fileName) async {
+Future<void> saveBLOBAsPDF(
+    Uint8List? blobFile, String fileName, BuildContext context) async {
   try {
+    if (blobFile == null) {
+      alertError("Blob está vazio", context);
+    }
+
     if (!kIsWeb) {
       final directory = await getTemporaryDirectory();
+
       String newFileName = utf8.decode(fileName.replaceAll(" ", "_").codeUnits);
-      final file = File("${directory.path}/$newFileName.pdf");
+      final filePath = "${directory.path}/$newFileName.pdf";
 
-      print(base64Str);
-      Uint8List data = base64Str!;
-      print(data);
+      final file = File(filePath);
+      await file.writeAsBytes(blobFile!);
+      await DocumentFileSavePlus().saveFile(
+        blobFile,
+        fileName,
+        "application/pdf",
+      );
+      await OpenFile.open(filePath);
+      // Uint8List data = blobFile!;
+      // print(data);
+      // file.writeAsBytesSync(data);
 
-      file.writeAsBytesSync(data);
-
-      DocumentFileSavePlus().saveFile(data, newFileName, "text.pdf");
-      print("PDF salvo em ${directory.path}/$newFileName.pdf");
-      OpenFile.open('${directory.path}/$newFileName.pdf');
+      // DocumentFileSavePlus().saveFile(data, newFileName, "text.pdf");
+      // print("PDF salvo em ${directory.path}/$newFileName.pdf");
+      // OpenFile.open('${directory.path}/$newFileName.pdf');
     }
   } catch (e) {
-    print(e);
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Erro ao abrir documento'),
+        content: Text('$e'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop,
+            child: const Text(
+              'Ok',
+              style: TextStyle(color: Colors.black),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

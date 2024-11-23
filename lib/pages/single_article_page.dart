@@ -113,7 +113,7 @@ class SingleArticlePage extends StatelessWidget {
                   margin: const EdgeInsets.fromLTRB(0, 70, 0, 70),
                   child: ElevatedButton(
                     onPressed: () {
-                      saveBLOBAsPDF(article.blobFile, article.title);
+                      saveBLOBAsPDF(article.blobFile, article.title, context);
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: yellow,

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/services.dart';
 
 import '/models/entities/writer.dart';
@@ -25,13 +27,12 @@ class Research {
         _collaborators = collaborators;
 
   factory Research.fromJson(Map<String, dynamic> json) {
-    // print(json);
     return switch (json) {
       {
         "id": int id,
         "name": String title,
         "description": String description,
-        "blobFile": Uint8List? blobFile,
+        "blobFile": String base64BlobFile,
         "writer": {
           // Writer author,
           "id": int idWriter,
@@ -48,7 +49,7 @@ class Research {
           id: id,
           title: title,
           description: description,
-          blobFile: blobFile,
+          blobFile: base64Decode(base64BlobFile),
           author: Writer(
             id: idWriter,
             name: nameWriter,

@@ -122,7 +122,6 @@ class _LoginPageState extends State<LoginPage> {
                           style: TextStyle(fontSize: 15),
                         ),
                         Checkbox(
-                          // TODO: Verificar erro que está sendo jogado quando troca de valor
                           value: isWriter,
                           activeColor: yellow,
                           checkColor: Colors.black,
