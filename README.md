@@ -1,16 +1,9 @@
-# unipapers_project
+# UniPapers
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<p>
+  Projeto universitário em Flutter para Android e iPhone, com o objetivo de criar uma interface de organização de artigos e trabalhos acadêmicos feitos pelos alunos da universidade.
+</p>
+<p>
+  Criado por Luiz e Rafael, o sistema utiliza do armazenamento, edição e leitura de artigos diversos criados dentro da instituição, para que seja um acervo acessível de conteúdo de 
+  referência e citação para os demais estudantes.
+</p>
