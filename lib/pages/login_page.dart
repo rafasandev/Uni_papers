@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../models/entities/writer.dart';
 import 'package:unipapers_project/widgets/login_reader_widget.dart';
 import 'package:unipapers_project/widgets/login_writer_widget.dart';
 import '/utils/colors.dart';
@@ -19,6 +20,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: background,
       body: SafeArea(
@@ -47,6 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                     height: 25,
                   ),
                   TextFormField(
+                    initialValue: 'admin',
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: white,
@@ -140,6 +143,24 @@ class _LoginPageState extends State<LoginPage> {
                         child: ElevatedButton(
                           onPressed: () {
                             setState(() {
+                              if (email == 'admin') {
+                                Writer user = Writer(
+                                  id: 1,
+                                  name: 'Luiz Gustavo',
+                                  phone: '1193293293',
+                                  email: 'luiz@aaa',
+                                  password: 'senha111',
+                                  course: 'Engenharia da Computação',
+                                  ra: '00115993',
+                                );
+
+                                Navigator.pushNamed(
+                                  context,
+                                  '/main_page',
+                                  arguments: user,
+                                );
+                              }
+
                               if (_formKey.currentState!.validate()) {
                                 if (isWriter) {
                                   showDialog(
@@ -192,8 +213,10 @@ class _LoginPageState extends State<LoginPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      const Text(
-                        'Não possui uma conta?',
+                      Text(
+                        (screenWidth <= 370)
+                            ? 'Não possui\numa conta?'
+                            : 'Não possui uma conta?',
                         style: TextStyle(
                           fontSize: 15,
                           color: Colors.black,

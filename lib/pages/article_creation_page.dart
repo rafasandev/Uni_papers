@@ -28,6 +28,7 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
   @override
   Widget build(BuildContext context) {
     Writer writer = ModalRoute.of(context)!.settings.arguments as Writer;
+    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: background,
       appBar: PreferredSize(
@@ -122,16 +123,16 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                                     });
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    // backgroundColor: background,
-                                    // elevation: 0.0,
                                     backgroundColor: blue,
                                     side: const BorderSide(
                                       width: 1.5,
                                       color: Colors.black,
                                     ),
                                   ),
-                                  child: const Text(
-                                    "Adicionar autor +",
+                                  child: Text(
+                                    (screenWidth <= 375)
+                                        ? 'Adicionar\nautor +'
+                                        : 'Adicionar autor +',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 16,
@@ -140,12 +141,10 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                                   ),
                                 ),
                               ),
+                              Spacer(),
                               if (countAuthors > 1)
                                 Container(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 10, 20, 10),
-                                  alignment: Alignment.centerRight,
-                                  // TODO: ARRUMAR ESSA BOSTA DE BOTÃO
+                                  padding: EdgeInsets.fromLTRB(0, 10, 20, 10),
                                   child: ElevatedButton(
                                     onPressed: () {
                                       setState(() {
@@ -164,8 +163,10 @@ class _ArticleCreationPageState extends State<ArticleCreationPage> {
                                         color: Colors.black,
                                       ),
                                     ),
-                                    child: const Text(
-                                      "Remover autor -",
+                                    child: Text(
+                                      (screenWidth <= 375)
+                                          ? 'Remover\nautor -'
+                                          : 'Remover autor -',
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 16,
