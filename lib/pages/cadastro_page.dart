@@ -259,6 +259,7 @@ class _CadastroPageState extends State<CadastroPage> {
                               inputFormatters: <TextInputFormatter>[
                                 FilteringTextInputFormatter.digitsOnly
                               ],
+                              buildCounter: removeLimitShow,
                               maxLength: 8,
                               decoration: InputDecoration(
                                 filled: true,
@@ -279,32 +280,43 @@ class _CadastroPageState extends State<CadastroPage> {
                             const SizedBox(
                               height: 20,
                             ),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: white,
-                                borderRadius: BorderRadius.circular(5),
+                            DropdownButtonFormField(
+                              decoration: InputDecoration(
+                                label: Text('Curso'),
+                                filled: true,
+                                fillColor: white,
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
                               ),
-                              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                              child: DropdownButton(
-                                isExpanded: true,
-                                value: dropdownValue,
-                                hint: const Text("CURSO"),
-                                dropdownColor: white,
-                                items: coursesList
-                                    .map<DropdownMenuItem<String>>(
-                                        (String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(value),
-                                  );
-                                }).toList(),
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    dropdownValue = newValue!;
-                                  });
-                                },
-                              ),
-                            )
+                              isExpanded: true,
+                              value: dropdownValue,
+                              hint: const Text('CURSO'),
+                              dropdownColor: white,
+                              items: coursesList.map<DropdownMenuItem<String>>(
+                                  (String value) {
+                                return DropdownMenuItem(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  dropdownValue = newValue!;
+                                });
+                              },
+                              validator: (value) {
+                                if (value == 'CURSO' ||
+                                    value == null ||
+                                    value == '') {
+                                  return 'Este campo precisa ser preenchido';
+                                }
+                                return null;
+                              },
+                            ),
                           ],
                         );
                       }
@@ -392,4 +404,12 @@ class _CadastroPageState extends State<CadastroPage> {
       ),
     );
   }
+
+  Widget? removeLimitShow(
+    _, {
+    required currentLength,
+    required isFocused,
+    maxLength,
+  }) =>
+      null;
 }

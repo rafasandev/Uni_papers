@@ -16,8 +16,6 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     final user = ModalRoute.of(context)!.settings.arguments;
-    // TODO: Fazer um botão de logout do usuário
-    // TODO: Melhora essa bosta de tela
     return Scaffold(
       backgroundColor: background,
       body: SafeArea(

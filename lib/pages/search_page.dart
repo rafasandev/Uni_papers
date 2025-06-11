@@ -59,7 +59,6 @@ class _SearchPageState extends State<SearchPage> {
                         onChanged: (value) {
                           setState(() {
                             search = value;
-                            // TODO: Colocar um timer para a pesquisa não pesar em reqs
                             SearchWidget(
                               search: search,
                             );

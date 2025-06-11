@@ -191,42 +191,101 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       ),
                       Builder(builder: (context) {
                         if (user is Writer) {
-                          return DropdownButtonFormField(
-                            decoration: InputDecoration(
-                              label: Text('Curso'),
-                              filled: true,
-                              fillColor: white,
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
+                          return Column(
+                            children: [
+                              DropdownButtonFormField(
+                                decoration: InputDecoration(
+                                  label: Text('Curso'),
+                                  filled: true,
+                                  fillColor: white,
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                isExpanded: true,
+                                value: user.course,
+                                hint: Text(user.course),
+                                dropdownColor: white,
+                                items: coursesList
+                                    .map<DropdownMenuItem<String>>(
+                                        (String value) {
+                                  return DropdownMenuItem(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    user.course = newValue!;
+                                  });
+                                },
+                                validator: (value) {
+                                  if (value == 'CURSO' ||
+                                      value == null ||
+                                      value == '') {
+                                    return 'Este campo precisa ser preenchido';
+                                  }
+                                  return null;
+                                },
                               ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
+                              const SizedBox(
+                                height: 20,
                               ),
-                            ),
-                            isExpanded: true,
-                            value: user.course,
-                            hint: Text(user.course),
-                            dropdownColor: white,
-                            items: coursesList
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                user.course = newValue!;
-                              });
-                            },
-                            validator: (value) {
-                              if (value == 'CURSO' ||
-                                  value == null ||
-                                  value == '') {
-                                return 'Este campo precisa ser preenchido';
-                              }
-                              return null;
-                            },
+                              TextFormField(
+                                initialValue: user.ra,
+                                readOnly: true,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: <TextInputFormatter>[
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                maxLength: 8,
+                                buildCounter: removeLimitShow,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: white,
+                                  labelText: "RA",
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                onChanged: (value) => value,
+                                validator: (value) {
+                                  if (value == '' || value == null) {
+                                    return "Este campo deve ser preenchido";
+                                  }
+                                  return null;
+                                },
+                              ),
+                              const SizedBox(
+                                height: 3,
+                              ),
+                              Text.rich(
+                                TextSpan(
+                                  text:
+                                      'Para realizar alterações em seu RA, contate o suporte via e-mail: ',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.black,
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                      text: 'suporte@unipapers.com.br',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                textAlign: TextAlign.start,
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                            ],
                           );
                         }
                         return SizedBox();
@@ -302,4 +361,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
           ),
         ));
   }
+
+  Widget? removeLimitShow(
+    _, {
+    required currentLength,
+    required isFocused,
+    maxLength,
+  }) =>
+      null;
 }
