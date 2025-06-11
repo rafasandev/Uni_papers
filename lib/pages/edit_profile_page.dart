@@ -1,4 +1,10 @@
+import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:unipapers_project/models/entities/reader.dart';
+import 'package:unipapers_project/models/entities/writer.dart';
+import 'package:unipapers_project/utils/colors.dart';
+import 'package:unipapers_project/utils/courses_list.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({super.key});
@@ -8,40 +14,228 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
+  final _formKey = GlobalKey<FormState>();
+  bool passVisible = false;
   @override
   Widget build(BuildContext context) {
+    dynamic user = ModalRoute.of(context)!.settings.arguments;
+
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("Edição de perfil"),
-        ),
+        backgroundColor: background,
         body: SafeArea(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.build_circle_outlined,
-                  size: 180,
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(
-                    vertical: 20,
+          child: SingleChildScrollView(
+            child: Center(
+              child: Form(
+                key: _formKey,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(60, 0, 60, 0),
+                        child: Image.asset("lib/images/onlyHandsLogo.png"),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const Text(
+                        "EDITAR PERFIL",
+                        style: TextStyle(
+                          fontSize: 23,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 35,
+                      ),
+                      TextFormField(
+                        initialValue: "",
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: white,
+                          labelText: "Nome Completo",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        onChanged: (value) => user.name = value,
+                        validator: (value) {
+                          if (value == '' || value == null) {
+                            return "Este campo deve ser preenchido";
+                          } else if (value.contains(RegExp(r'[0-9]'))) {
+                            return "Insira um nome válido";
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly,
+                          TextInputMask(mask: '(99) 99999-9999'),
+                        ],
+                        initialValue: user.phone,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: white,
+                          labelText: "Telefone",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        onChanged: (value) => user.phone = value,
+                        validator: (value) {
+                          if (value == '' || value == null) {
+                            return "Este campo deve ser preenchido";
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        initialValue: user.email,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: white,
+                          labelText: "Email",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        onChanged: (value) => user.email = value,
+                        validator: (value) {
+                          if (value == '' || value == null) {
+                            return "Este campo deve ser preenchido";
+                          }
+                          if (!value.contains("@")) {
+                            return "Insira um email válido";
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        initialValue: user.password,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: white,
+                          labelText: "Senha",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          suffixIcon: (passVisible)
+                              ? IconButton(
+                                  icon:
+                                      const Icon(Icons.remove_red_eye_outlined),
+                                  onPressed: () {
+                                    setState(() {
+                                      passVisible = !passVisible;
+                                    });
+                                  })
+                              : IconButton(
+                                  icon:
+                                      const Icon(Icons.visibility_off_outlined),
+                                  onPressed: () {
+                                    setState(() {
+                                      passVisible = !passVisible;
+                                    });
+                                  }),
+                        ),
+                        obscureText: !passVisible,
+                        onChanged: (value) => user.password = value,
+                        validator: (value) {
+                          if (value == '' || value == null) {
+                            return "Este campo deve ser preenchido";
+                          }
+                          if (value.length < 8) {
+                            return "Sua senha deve conter pelo menos 8 caracteres";
+                          }
+                          if (!value.contains(RegExp(r'[0-9]')) ||
+                              !value.contains(RegExp(r'[a-z]'))) {
+                            return "Sua senha deve conter letras e números";
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: white,
+                          labelText: "Confirme a Nova Senha",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        obscureText: true,
+                        validator: (value) {
+                          if (user.password != value) {
+                            return "As senhas não conferem";
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Builder(builder: (context) {
+                        if (user is Writer) {
+                          return DropdownButtonFormField(
+                            decoration: InputDecoration(
+                              label: Text('Curso'),
+                              filled: true,
+                              fillColor: white,
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            isExpanded: true,
+                            value: user.course,
+                            hint: Text(user.course),
+                            dropdownColor: white,
+                            items: coursesList
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                user.course = newValue!;
+                              });
+                            },
+                            validator: (value) {
+                              if (value == 'CURSO' ||
+                                  value == null ||
+                                  value == '') {
+                                return 'Este campo precisa ser preenchido';
+                              }
+                              return null;
+                            },
+                          );
+                        }
+                        return SizedBox();
+                      })
+                      /*
+                      TODO: Fazer o resto dos campos, acho que não faz sentido deixar trocar o RA e Curso do escritor, talvez uma mensagem para chamar o suporte?
+                      */
+                    ],
                   ),
-                  child: const Text(
-                    "Página em Construção",
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
                 ),
-                const Text(
-                  "Por favor retorne ao menu",
-                  style: TextStyle(
-                    fontSize: 25,
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
         ));

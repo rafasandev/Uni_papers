@@ -15,6 +15,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
+    final user = ModalRoute.of(context)!.settings.arguments;
     // TODO: Fazer um botão de logout do usuário
     // TODO: Melhora essa bosta de tela
     return Scaffold(
@@ -85,7 +86,11 @@ class _ProfilePageState extends State<ProfilePage> {
                         backgroundColor: background,
                       ),
                       onPressed: () {
-                        Navigator.pushNamed(context, "/edit_profile");
+                        Navigator.pushNamed(
+                          context,
+                          "/edit_profile",
+                          arguments: user,
+                        );
                       },
                       child: const Padding(
                         padding: EdgeInsets.all(8.0),

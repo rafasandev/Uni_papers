@@ -8,8 +8,8 @@ import '/models/entities/writer.dart';
 
 /* Links Luiz - PC Trabalho, pessoal e geral */
 // const String apiLink = 'http://pc-luiz:8080/api'; // Trabalho
-// const String apiLink = 'http://luizpc:8080/api'; //Note
-const String apiLink = 'http://localhost:8080/api'; // Local
+const String apiLink = 'http://192.168.0.107:8080/api'; //Note
+// const String apiLink = 'http://localhost:8080/api'; // Local
 // const String apiLink = 'http://192.168.146.48:8080/api';
 
 Future<Reader> fetchReaderWithEmail(String email) async {

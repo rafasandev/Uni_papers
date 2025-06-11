@@ -64,7 +64,8 @@ class LoginWriterWidget extends StatelessWidget {
               );
             } else if (user.password == password) {
               return AlertDialog(
-                title: Text('Bem vindo ${snapshot.data!.name.split(" ")[0]}'),
+                title:
+                    Text('Bem vindo(a) ${snapshot.data!.name.split(" ")[0]}'),
                 content: const Text(
                     'Seu login foi feito com sucesso, lhe desejamos bons estudos'),
                 actions: [
