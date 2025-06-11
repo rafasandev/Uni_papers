@@ -5,6 +5,8 @@ import 'package:unipapers_project/models/entities/reader.dart';
 import 'package:unipapers_project/models/entities/writer.dart';
 import 'package:unipapers_project/utils/colors.dart';
 import 'package:unipapers_project/utils/courses_list.dart';
+import 'package:unipapers_project/widgets/update_reader_widget.dart';
+import 'package:unipapers_project/widgets/update_writer_widget.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({super.key});
@@ -49,7 +51,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         height: 35,
                       ),
                       TextFormField(
-                        initialValue: "",
+                        initialValue: user.name,
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: white,
@@ -228,10 +230,70 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           );
                         }
                         return SizedBox();
-                      })
-                      /*
-                      TODO: Fazer o resto dos campos, acho que não faz sentido deixar trocar o RA e Curso do escritor, talvez uma mensagem para chamar o suporte?
-                      */
+                      }),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+                                  if (_formKey.currentState!.validate()) {
+                                    if (user is Reader) {
+                                      showDialog(
+                                          context: context,
+                                          barrierDismissible: false,
+                                          builder: (BuildContext context) {
+                                            return UpdateReaderWidget(
+                                              id: user.id,
+                                              name: user.name,
+                                              phone: user.phone,
+                                              email: user.email,
+                                              password: user.password,
+                                            );
+                                          });
+                                    } else {
+                                      showDialog(
+                                          context: context,
+                                          barrierDismissible: false,
+                                          builder: (BuildContext context) {
+                                            return UpdateWriterWidget(
+                                              id: user.id,
+                                              name: user.name,
+                                              phone: user.phone,
+                                              email: user.email,
+                                              password: user.password,
+                                              course: user.course,
+                                              ra: user.ra,
+                                            );
+                                          });
+                                    }
+                                  }
+                                });
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: blue,
+                                side: const BorderSide(
+                                  width: 2.5,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              child: const Padding(
+                                padding: EdgeInsets.all(4.0),
+                                child: Text(
+                                  'Atualizar',
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),

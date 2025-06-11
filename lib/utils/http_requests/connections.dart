@@ -7,10 +7,7 @@ import '/models/entities/research.dart';
 import '/models/entities/writer.dart';
 
 /* Links Luiz - PC Trabalho, pessoal e geral */
-// const String apiLink = 'http://pc-luiz:8080/api'; // Trabalho
 const String apiLink = 'http://192.168.0.107:8080/api'; //Note
-// const String apiLink = 'http://localhost:8080/api'; // Local
-// const String apiLink = 'http://192.168.146.48:8080/api';
 
 Future<Reader> fetchReaderWithEmail(String email) async {
   final response =
@@ -80,11 +77,65 @@ Future<List<Research>> fetchResearchByName(String name) async {
   }
 }
 
-Future<Reader> createReader(
-  String nome,
-  String telefone,
+Future<void> updateReader(
+  int id,
+  String name,
+  String phone,
   String email,
-  String senha,
+  String password,
+) async {
+  final response = await http.put(
+    Uri.parse('$apiLink/readers/$id'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(<String, String>{
+      'name': name,
+      'phone': phone,
+      'email': email,
+      'password': password,
+    }),
+  );
+
+  if (response.statusCode != 200) {
+    throw Exception('Falha ao atualizar usuário!');
+  }
+}
+
+Future<void> updateWriter(
+  int id,
+  String name,
+  String phone,
+  String email,
+  String password,
+  String curso,
+  String ra,
+) async {
+  final response = await http.put(
+    Uri.parse('$apiLink/writers/$id'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(<String, String>{
+      'name': name,
+      'phone': phone,
+      'email': email,
+      'password': password,
+      'course': curso,
+      'ra': ra,
+    }),
+  );
+
+  if (response.statusCode != 200) {
+    throw Exception('Falha ao atualizar usuário!');
+  }
+}
+
+Future<Reader> createReader(
+  String name,
+  String phone,
+  String email,
+  String password,
 ) async {
   final response = await http.post(
     Uri.parse('$apiLink/readers'),
@@ -92,10 +143,10 @@ Future<Reader> createReader(
       'Content-Type': 'application/json; charset=UTF-8',
     },
     body: jsonEncode(<String, String>{
-      'name': nome,
-      'phone': telefone,
+      'name': name,
+      'phone': phone,
       'email': email,
-      'password': senha,
+      'password': password,
     }),
   );
 
@@ -108,11 +159,11 @@ Future<Reader> createReader(
 }
 
 Future<Writer> createWriter(
-  String nome,
-  String telefone,
+  String name,
+  String phone,
   String email,
-  String senha,
-  String curso,
+  String password,
+  String course,
   String ra,
 ) async {
   final response = await http.post(
@@ -122,17 +173,17 @@ Future<Writer> createWriter(
     },
     body: jsonEncode(
       <String, String>{
-        'name': nome,
-        'phone': telefone,
+        'name': name,
+        'phone': phone,
         'email': email,
-        'password': senha,
-        'course': curso,
+        'password': password,
+        'course': course,
         'ra': ra,
       },
     ),
   );
 
-  if (curso == 'CURSO') {
+  if (course == 'CURSO') {
     throw Exception('Curso deve ser escolhido');
   } else if (response.statusCode == 201) {
     return Writer.fromJson(json.decode(response.body) as Map<String, dynamic>);

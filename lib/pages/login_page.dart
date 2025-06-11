@@ -49,7 +49,6 @@ class _LoginPageState extends State<LoginPage> {
                     height: 25,
                   ),
                   TextFormField(
-                    initialValue: 'admin',
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: white,
@@ -143,24 +142,6 @@ class _LoginPageState extends State<LoginPage> {
                         child: ElevatedButton(
                           onPressed: () {
                             setState(() {
-                              if (email == 'admin') {
-                                Writer user = Writer(
-                                  id: 1,
-                                  name: 'Luiz Gustavo',
-                                  phone: '1193293293',
-                                  email: 'luiz@aaa',
-                                  password: 'senha111',
-                                  course: 'Engenharia da Computação',
-                                  ra: '00115993',
-                                );
-
-                                Navigator.pushNamed(
-                                  context,
-                                  '/main_page',
-                                  arguments: user,
-                                );
-                              }
-
                               if (_formKey.currentState!.validate()) {
                                 if (isWriter) {
                                   showDialog(
