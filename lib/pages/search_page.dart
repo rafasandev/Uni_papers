@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:unipapers_project/utils/colors.dart';
 
@@ -12,10 +14,23 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   String search = '';
+  Timer? _debounce;
   final fieldText = TextEditingController();
 
   void clearText() {
     fieldText.clear();
+  }
+
+  void _onSearchChanged(String value) {
+    if (_debounce?.isActive ?? false) _debounce!.cancel();
+
+    _debounce = Timer(const Duration(milliseconds: 750), () {
+      setState(() {
+        search = value;
+        // Aqui você chama seu widget ou lógica de busca
+        SearchWidget(search: search);
+      });
+    });
   }
 
   @override
@@ -38,32 +53,26 @@ class _SearchPageState extends State<SearchPage> {
                       margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                       child: TextField(
                         decoration: InputDecoration(
-                            label: const Text("Pesquise por um artigo"),
-                            focusColor: blue,
-                            suffixIcon: (search == "")
-                                ? const Icon(Icons.search)
-                                : IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        search = "";
-                                        clearText();
-                                        SearchWidget(search: search);
-                                      });
-                                    },
-                                    icon: const Icon(Icons.close)),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
-                                borderSide:
-                                    const BorderSide(color: Colors.grey))),
+                          label: const Text("Pesquise por um artigo"),
+                          focusColor: blue,
+                          suffixIcon: (search == "")
+                              ? const Icon(Icons.search)
+                              : IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      search = "";
+                                      clearText();
+                                      SearchWidget(search: search);
+                                    });
+                                  },
+                                  icon: const Icon(Icons.close)),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: const BorderSide(color: Colors.grey),
+                          ),
+                        ),
                         controller: fieldText,
-                        onChanged: (value) {
-                          setState(() {
-                            search = value;
-                            SearchWidget(
-                              search: search,
-                            );
-                          });
-                        },
+                        onChanged: _onSearchChanged,
                       ),
                     ),
                     if (search != '')

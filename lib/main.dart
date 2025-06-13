@@ -11,14 +11,13 @@ import '/utils/colors.dart';
 /**
  * * Feito
  * TODO: Fazer hash de senhas para envio ao DB
- * * Fazendo
- * 
+ * TODO: Colocar um timer para a pesquisa não pesar em reqs
  * * A fazer
+ * TODO: API - Verificar se email é válido
  * TODO: Colocar a pesquisa de escritores nos colaboradores
  * TODO: Inserir data de publicação e alterar na amostra do artigo
  * TODO: Fazer um botão de logout do usuário
  * TODO: Repensar tela de perfil do usuário
- * TODO: Colocar um timer para a pesquisa não pesar em reqs
  * TODO: Arrumar carregamento sempre que entra na tela da home page
 */
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
