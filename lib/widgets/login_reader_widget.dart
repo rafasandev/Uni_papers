@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:unipapers_project/models/entities/reader.dart';
 import 'package:unipapers_project/utils/http_requests/connections.dart';
+import 'package:unipapers_project/utils/logic.dart';
 
 class LoginReaderWidget extends StatelessWidget {
   const LoginReaderWidget({
@@ -45,6 +46,7 @@ class LoginReaderWidget extends StatelessWidget {
               phone: snapshot.data!.phone,
               email: snapshot.data!.email,
               password: snapshot.data!.password,
+              hashSalt: snapshot.data!.hashSalt,
             );
 
             if (user.password == 'ERRO' && user.name == 'ERRO') {
@@ -63,7 +65,10 @@ class LoginReaderWidget extends StatelessWidget {
                   ),
                 ],
               );
-            } else if (user.password == password) {
+            } else if (isPasswordValid(
+              hashedPassword: user.password,
+              enteredPassword: password,
+            )) {
               return AlertDialog(
                 title:
                     Text('Bem vindo(a) ${snapshot.data!.name.split(" ")[0]}'),

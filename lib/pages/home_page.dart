@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 );
               } else if (snapshot.hasError) {
-                return Center(child: Text('Error: ${snapshot.error}'));
+                return Center(child: Text('Error: ${snapshot.stackTrace}'));
               } else {
                 List<Research> researches = snapshot.data!;
                 researches = researches.reversed.toList();

@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_getters_setters
+
 class Writer {
   int _id;
   String _name;
@@ -6,6 +8,7 @@ class Writer {
   String _password;
   String _course;
   String _ra;
+  String _hashSalt;
 
   Writer({
     required int id,
@@ -15,7 +18,9 @@ class Writer {
     required String password,
     required String course,
     required String ra,
-  })  : _ra = ra,
+    required String hashSalt,
+  })  : _hashSalt = hashSalt,
+        _ra = ra,
         _course = course,
         _password = password,
         _email = email,
@@ -33,6 +38,7 @@ class Writer {
         "password": String password,
         "course": String course,
         "ra": String ra,
+        "hashSalt": String hashSalt,
       } =>
         Writer(
           id: id,
@@ -42,6 +48,7 @@ class Writer {
           password: password,
           course: course,
           ra: ra,
+          hashSalt: hashSalt,
         ),
       _ => throw const FormatException('Failed to load reader.'),
     };
@@ -87,5 +94,11 @@ class Writer {
 
   set ra(String value) {
     _ra = value;
+  }
+
+  String get hashSalt => _hashSalt;
+
+  set hashSalt(String value) {
+    _hashSalt = value;
   }
 }

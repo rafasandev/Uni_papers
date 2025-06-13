@@ -49,6 +49,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.4+2"
+  crypt:
+    dependency: "direct main"
+    description:
+      name: crypt
+      sha256: f8726c819c306ea4ae952baed3aa9a1d6736f4437fae567691592c1cc4f1feac
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.3.1"
+  crypto:
+    dependency: transitive
+    description:
+      name: crypto
+      sha256: "1e445881f28f22d6140f181e07737b22f1e099a5e1ff94b0af2f9e4a463f4855"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.6"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -429,6 +445,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.8.0"
+  word_generator:
+    dependency: "direct main"
+    description:
+      name: word_generator
+      sha256: "17c7284ef75c4dfb921c247e8be095d0615430864f6b4aa9563f19e888074c29"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.0"
   xdg_directories:
     dependency: transitive
     description:

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../models/entities/writer.dart';
 import 'package:unipapers_project/widgets/login_reader_widget.dart';
 import 'package:unipapers_project/widgets/login_writer_widget.dart';
 import '/utils/colors.dart';

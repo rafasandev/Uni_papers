@@ -11,6 +11,7 @@ class UpdateWriterWidget extends StatelessWidget {
     required this.password,
     required this.course,
     required this.ra,
+    required this.hashSalt,
   });
 
   final int id;
@@ -20,19 +21,13 @@ class UpdateWriterWidget extends StatelessWidget {
   final String password;
   final String course;
   final String ra;
+  final String hashSalt;
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
         future: updateWriter(
-          id,
-          name,
-          phone,
-          email,
-          password,
-          course,
-          ra,
-        ),
+            id, name, phone, email, password, course, ra, hashSalt),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Padding(

@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_getters_setters
+
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
@@ -42,6 +44,7 @@ class Research {
           "password": String passwordWriter,
           "course": String courseWriter,
           "ra": String raWriter,
+          "hashSalt": String hashSaltWriter,
         },
         "collaborators": String? collaborators,
       } =>
@@ -58,6 +61,7 @@ class Research {
             password: passwordWriter,
             course: courseWriter,
             ra: raWriter,
+            hashSalt: hashSaltWriter,
           ),
           collaborators: collaborators,
         ),

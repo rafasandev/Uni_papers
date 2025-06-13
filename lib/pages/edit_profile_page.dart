@@ -311,6 +311,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                               phone: user.phone,
                                               email: user.email,
                                               password: user.password,
+                                              hashSalt: user.hashSalt,
                                             );
                                           });
                                     } else {
@@ -326,6 +327,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                               password: user.password,
                                               course: user.course,
                                               ra: user.ra,
+                                              hashSalt: user.hashSalt,
                                             );
                                           });
                                     }

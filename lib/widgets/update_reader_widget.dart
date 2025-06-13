@@ -9,6 +9,7 @@ class UpdateReaderWidget extends StatelessWidget {
     required this.phone,
     required this.email,
     required this.password,
+    required this.hashSalt,
   });
 
   final int id;
@@ -16,6 +17,7 @@ class UpdateReaderWidget extends StatelessWidget {
   final String phone;
   final String email;
   final String password;
+  final String hashSalt;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,7 @@ class UpdateReaderWidget extends StatelessWidget {
           phone,
           email,
           password,
+          hashSalt,
         ),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {

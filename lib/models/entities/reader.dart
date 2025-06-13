@@ -1,9 +1,12 @@
+// ignore_for_file: unnecessary_getters_setters
+
 class Reader {
   int _id;
   String _name;
   String _phone;
   String _email;
   String _password;
+  String _hashSalt;
 
   Reader({
     required int id,
@@ -11,7 +14,9 @@ class Reader {
     required String phone,
     required String email,
     required String password,
-  })  : _password = password,
+    required String hashSalt,
+  })  : _hashSalt = hashSalt,
+        _password = password,
         _email = email,
         _phone = phone,
         _name = name,
@@ -25,6 +30,7 @@ class Reader {
         "phone": String phone,
         "email": String email,
         "password": String password,
+        "hashSalt": String hashSalt,
       } =>
         Reader(
           id: id,
@@ -32,6 +38,7 @@ class Reader {
           phone: phone,
           email: email,
           password: password,
+          hashSalt: hashSalt,
         ),
       _ => throw const FormatException('Failed to load reader.'),
     };
@@ -65,5 +72,11 @@ class Reader {
 
   set password(String value) {
     _password = value;
+  }
+
+  String get hashSalt => _hashSalt;
+
+  set hashSalt(String value) {
+    _hashSalt = value;
   }
 }

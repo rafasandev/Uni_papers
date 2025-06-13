@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:unipapers_project/utils/logic.dart';
 import '/models/entities/reader.dart';
 import '/models/entities/research.dart';
 import '/models/entities/writer.dart';
@@ -23,6 +24,7 @@ Future<Reader> fetchReaderWithEmail(String email) async {
       phone: '',
       email: '',
       password: 'ERRO',
+      hashSalt: '',
     );
     return reader;
   }
@@ -44,6 +46,7 @@ Future<Writer> fetchWriterWithEmail(String email) async {
       password: 'ERRO',
       course: '',
       ra: '',
+      hashSalt: '',
     );
     return writer;
   }
@@ -83,6 +86,7 @@ Future<void> updateReader(
   String phone,
   String email,
   String password,
+  String hashSalt,
 ) async {
   final response = await http.put(
     Uri.parse('$apiLink/readers/$id'),
@@ -94,6 +98,7 @@ Future<void> updateReader(
       'phone': phone,
       'email': email,
       'password': password,
+      'hashSalt': hashSalt,
     }),
   );
 
@@ -110,6 +115,7 @@ Future<void> updateWriter(
   String password,
   String curso,
   String ra,
+  String hashSalt,
 ) async {
   final response = await http.put(
     Uri.parse('$apiLink/writers/$id'),
@@ -123,6 +129,7 @@ Future<void> updateWriter(
       'password': password,
       'course': curso,
       'ra': ra,
+      'hashSalt': hashSalt,
     }),
   );
 
@@ -137,6 +144,9 @@ Future<Reader> createReader(
   String email,
   String password,
 ) async {
+  String salt = createSalt();
+  String hashedPassword = hashPassword(password, salt);
+
   final response = await http.post(
     Uri.parse('$apiLink/readers'),
     headers: <String, String>{
@@ -146,7 +156,8 @@ Future<Reader> createReader(
       'name': name,
       'phone': phone,
       'email': email,
-      'password': password,
+      'password': hashedPassword,
+      'hashSalt': salt,
     }),
   );
 
@@ -166,6 +177,9 @@ Future<Writer> createWriter(
   String course,
   String ra,
 ) async {
+  String salt = createSalt();
+  String hashedPassword = hashPassword(password, salt);
+
   final response = await http.post(
     Uri.parse('$apiLink/writers'),
     headers: <String, String>{
@@ -176,9 +190,10 @@ Future<Writer> createWriter(
         'name': name,
         'phone': phone,
         'email': email,
-        'password': password,
+        'password': hashedPassword,
         'course': course,
         'ra': ra,
+        'hashSalt': salt,
       },
     ),
   );
